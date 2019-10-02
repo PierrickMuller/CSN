@@ -1,0 +1,128 @@
+# //  Questa Sim-64
+# //  Version 10.5c_2 linux_x86_64 Oct 17 2016
+# //
+# //  Copyright 1991-2016 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+vcom -reportprogress 300 -work work /cours_REDS/CSN/PierrickMuller/CSN/Labos/Labo1/intro_bin_lin/src/bin_lin_3to8.vhd
+# QuestaSim-64 vcom 10.5c_2 Compiler 2016.10 Oct 17 2016
+# Start time: 10:30:40 on Oct 02,2019
+# vcom -reportprogress 300 -work work /cours_REDS/CSN/PierrickMuller/CSN/Labos/Labo1/intro_bin_lin/src/bin_lin_3to8.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity bin_lin_3to8
+# -- Compiling architecture flot_don of bin_lin_3to8
+# End time: 10:30:40 on Oct 02,2019, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work /cours_REDS/CSN/PierrickMuller/CSN/Labos/Labo1/intro_bin_lin/src_tb/console_sim.vhd
+# QuestaSim-64 vcom 10.5c_2 Compiler 2016.10 Oct 17 2016
+# Start time: 10:30:47 on Oct 02,2019
+# vcom -reportprogress 300 -work work /cours_REDS/CSN/PierrickMuller/CSN/Labos/Labo1/intro_bin_lin/src_tb/console_sim.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity console_sim
+# -- Compiling architecture struct of console_sim
+# -- Loading entity bin_lin_3to8
+# ** Error: /cours_REDS/CSN/PierrickMuller/CSN/Labos/Labo1/intro_bin_lin/src_tb/console_sim.vhd(102): near "L0_obs": (vcom-1576) expecting ';'.
+# ** Error (suppressible): /cours_REDS/CSN/PierrickMuller/CSN/Labos/Labo1/intro_bin_lin/src_tb/console_sim.vhd(112): (vcom-1141) Identifier "bin_lin_2to4" does not identify a component declaration.
+# ** Warning: /cours_REDS/CSN/PierrickMuller/CSN/Labos/Labo1/intro_bin_lin/src_tb/console_sim.vhd(91): (vcom-1263) Configuration specification "all : bin_lin_3to8" applies to no component instantiation statements.
+# ** Error: /cours_REDS/CSN/PierrickMuller/CSN/Labos/Labo1/intro_bin_lin/src_tb/console_sim.vhd(118): VHDL Compiler exiting
+# End time: 10:30:47 on Oct 02,2019, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 1
+vcom -reportprogress 300 -work work /cours_REDS/CSN/PierrickMuller/CSN/Labos/Labo1/intro_bin_lin/src_tb/console_sim.vhd
+# QuestaSim-64 vcom 10.5c_2 Compiler 2016.10 Oct 17 2016
+# Start time: 10:31:05 on Oct 02,2019
+# vcom -reportprogress 300 -work work /cours_REDS/CSN/PierrickMuller/CSN/Labos/Labo1/intro_bin_lin/src_tb/console_sim.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity console_sim
+# -- Compiling architecture struct of console_sim
+# -- Loading entity bin_lin_3to8
+# ** Error (suppressible): /cours_REDS/CSN/PierrickMuller/CSN/Labos/Labo1/intro_bin_lin/src_tb/console_sim.vhd(112): (vcom-1141) Identifier "bin_lin_2to4" does not identify a component declaration.
+# ** Warning: /cours_REDS/CSN/PierrickMuller/CSN/Labos/Labo1/intro_bin_lin/src_tb/console_sim.vhd(91): (vcom-1263) Configuration specification "all : bin_lin_3to8" applies to no component instantiation statements.
+# ** Error: /cours_REDS/CSN/PierrickMuller/CSN/Labos/Labo1/intro_bin_lin/src_tb/console_sim.vhd(118): VHDL Compiler exiting
+# End time: 10:31:05 on Oct 02,2019, Elapsed time: 0:00:00
+# Errors: 2, Warnings: 1
+vcom -reportprogress 300 -work work /cours_REDS/CSN/PierrickMuller/CSN/Labos/Labo1/intro_bin_lin/src_tb/console_sim.vhd
+# QuestaSim-64 vcom 10.5c_2 Compiler 2016.10 Oct 17 2016
+# Start time: 10:31:33 on Oct 02,2019
+# vcom -reportprogress 300 -work work /cours_REDS/CSN/PierrickMuller/CSN/Labos/Labo1/intro_bin_lin/src_tb/console_sim.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity console_sim
+# -- Compiling architecture struct of console_sim
+# -- Loading entity bin_lin_3to8
+# End time: 10:31:33 on Oct 02,2019, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim work.console_sim
+# vsim work.console_sim 
+# Start time: 10:32:03 on Oct 02,2019
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.console_sim(struct)#1
+# Loading work.bin_lin_3to8(flot_don)#1
+do /cours_REDS/CSN/PierrickMuller/CSN/Labos/Labo1/intro_bin_lin/run_comp_bin_lin_sim.tcl
+# ** Warning: (vlib-34) Library already exists at "work".
+# QuestaSim-64 vmap 10.5c_2 Lib Mapping Utility 2016.10 Oct 17 2016
+# vmap work work 
+# Modifying modelsim.ini
+# QuestaSim-64 vcom 10.5c_2 Compiler 2016.10 Oct 17 2016
+# Start time: 10:32:23 on Oct 02,2019
+# vcom -reportprogress 300 -work work ../src/bin_lin_2to4_tdv.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity bin_lin_2to4
+# -- Compiling architecture tdv of bin_lin_2to4
+# End time: 10:32:23 on Oct 02,2019, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.5c_2 Compiler 2016.10 Oct 17 2016
+# Start time: 10:32:23 on Oct 02,2019
+# vcom -reportprogress 300 -work work ../src_tb/console_sim.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity console_sim
+# -- Compiling architecture struct of console_sim
+# -- Loading entity bin_lin_3to8
+# End time: 10:32:23 on Oct 02,2019, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# End time: 10:32:24 on Oct 02,2019, Elapsed time: 0:00:21
+# Errors: 0, Warnings: 0
+# vsim -novopt work.console_sim 
+# Start time: 10:32:24 on Oct 02,2019
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# Loading std.standard
+# Refreshing /cours_REDS/CSN/PierrickMuller/CSN/Labos/Labo1/intro_bin_lin/comp/work.console_sim(struct)
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.console_sim(struct)
+# Refreshing /cours_REDS/CSN/PierrickMuller/CSN/Labos/Labo1/intro_bin_lin/comp/work.bin_lin_3to8(flot_don)
+# Loading work.bin_lin_3to8(flot_don)
+# 8.5.13
+# 4.0.2
+# REDS Console
+# REDS_console
+# /opt/tools_reds
+# linux
+# FALSE
+# ./REDS_console_sigImg.gif
+# 16
+# 16
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# End time: 10:33:37 on Oct 02,2019, Elapsed time: 0:01:13
+# Errors: 0, Warnings: 2

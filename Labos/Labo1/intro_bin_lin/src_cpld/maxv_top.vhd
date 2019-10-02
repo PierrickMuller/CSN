@@ -24,7 +24,7 @@
 -- Modifications :
 -- Ver   Date        Engineer     Chnages
 -- 0.0   See header  GCD          Initial version
--- 1.0   25.09.2014  EMI          Adaptation to use for CSN lab 
+-- 1.0   25.09.2014  EMI          Adaptation to use for CSN lab
 --
 ------------------------------------------------------------------------------------------
 
@@ -60,7 +60,7 @@ architecture struct of maxv_top is
 
   --| Intermediate signals |--------------------------------------------------------------
   signal Reset_s          : std_logic;
-  
+
   signal Con_25p_DI_s   : std_logic_vector(Con_25p_io'range);
   signal Con_25p_DO_s   : std_logic_vector(Con_25p_io'range);
   signal Con_25p_OE_s   : std_logic;
@@ -79,47 +79,53 @@ architecture struct of maxv_top is
 
   --| Components declaration |------------------------------------------------------------
 
-  component bin_lin_2to4 is
-    port( bin_i  : in std_logic_vector(1 downto 0);
+  component bin_lin_3to8 is
+    port( bin_i  : in std_logic_vector(2 downto 0);
                  -- valeur binaire en entree
-          lin_o  : out std_logic_vector(3 downto 0)
+          lin_o  : out std_logic_vector(7 downto 0)
                   -- valeur lineaire en sortie
     );
   end component;
-  for all : bin_lin_2to4 use entity work.bin_lin_2to4(eq_logic);
+  --for all : bin_lin_2to4 use entity work.bin_lin_2to4(eq_logic);
   --for all : bin_lin_2to4 use entity work.bin_lin_2to4(tdv);
-  
+  for all : bin_lin_3to8 use entity work.bin_lin_3to8(flot_don);
 
-  
+
+
 begin
 
   ----------------------------------------------------------------------------------------
   --| INPUTS PROCESSING |-----------------------------------------------------------------
   Reset_s <= not nReset_i;
   Button_s <= not nButton_i;
-  
+
   ----------------------------------------------------------------------------------------
   --| OUTPUT PROCESSING |-----------------------------------------------------------------
   nLed_o <= not Led_s;
   nSeven_Seg_o <= not Seven_Seg_s;
-  
+
 
   ----------------------------------------------------------------------------------------
   --| Unused output allocation |-----------------------------------------------------------------
   Led_RGB_o <= (others => '0');
   Seven_Seg_s(Seven_Seg_s'high-1 downto 0) <= (others => '0');
   Seven_Seg_s(Seven_Seg_s'high) <= Cpt_s(Cpt_s'high); -- decimal point blink at 1Hz
-  
+
   ----------------------------------------------------------------------------------------
   --| Components intanciation |-----------------------------------------------------------
-  U1: bin_lin_2to4 port map (bin_i(0) => Button_s(1),
+  U1: bin_lin_3to8 port map (bin_i(0) => Button_s(1),
                              bin_i(1) => Button_s(2),
+                             bin_i(2) => Button_s(3),
                              lin_o(0) => Led_s(0),
                              lin_o(1) => Led_s(1),
                              lin_o(2) => Led_s(2),
-                             lin_o(3) => Led_s(3)
+                             lin_o(3) => Led_s(3),
+                             lin_o(4) => Led_s(4),
+                             lin_o(5) => Led_s(5),
+                             lin_o(6) => Led_s(6),
+                             lin_o(7) => Led_s(7)
                              );
-  Led_s(7 downto 4) <= (others => '0'); --unused leds turned off 
+  --Led_s(7 downto 4) <= (others => '0'); --unused leds turned off
 
   ----------------------------------------------------------------------------------------
   --| Signal blink at 1Hz |------------------------------------------------------------------
@@ -131,8 +137,7 @@ begin
       Cpt_s <= Cpt_s +1;
     end if;
   end process;
-  
-  
-  
-end struct;
 
+
+
+end struct;

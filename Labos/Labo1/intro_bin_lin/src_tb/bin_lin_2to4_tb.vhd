@@ -5,12 +5,12 @@
 -- Fichier      : bin_lin_2to4_tb.vhd
 --
 -- Description  : Test bench du decodeur 2 bits en lineaire
--- 
+--
 -- Auteur       : Maurice Gaumain
 -- Date         : 01.02.2003
 -- Version      : 0.0
--- 
--- 
+--
+--
 --| Modifications |------------------------------------------------------------
 -- Vers  Qui  Date       Description
 -- 1.0   EMI  15.02.2015 Adaptation à la nouvelle convention pour identificateurs
@@ -34,9 +34,9 @@ architecture test_bench of bin_lin_2to4_tb is
          );
    end component;
  --Decommenter la ligne de la description souhaitee pour la simulation auto
-   for all : bin_lin_2to4 use entity work.bin_lin_2to4(eq_logic);
+   --for all : bin_lin_2to4 use entity work.bin_lin_2to4(eq_logic);
    --for all : bin_lin_2to4 use entity work.bin_lin_2to4(tdv);
-   --for all : bin_lin_2to4 use entity work.bin_lin_2to4(flot_don);
+   for all : bin_lin_2to4 use entity work.bin_lin_2to4(flot_don);
 
   --simulation apres routage
   --for IC_test : Bin_Lin_2to4 use entity work.Bin_Lin_2to4(\epm7064slc44-10\);
@@ -60,21 +60,21 @@ begin
 
 
   --Process de generation des stimuli (sti) et reference (ref)
-  process 
-  
+  process
+
   begin
      -- initialiser les signaux
      NB_erreur := 0;
      Fin_Sim <= False;
-  
+
      -- message de debut
      report "debut de simulation " ;
-  
+
      For VB in 0 to 3 loop
-  
+
         -- valeur des entrees --
         Val_Bin_Sti <= Std_Logic_Vector(to_Unsigned(VB,2)) ;
-  
+
         -- valeur de la reference --
         Val_Lin_Ref <= "0000" ;
            For I in 0 to 3 loop
@@ -86,7 +86,7 @@ begin
      end loop ;
      Fin_sim <= true;
         wait for pas_sim;
-  
+
      -- messages de fin
      if (Nb_erreur = 0) then
         report " *** VOUS ETES LES MEILLEURS *** ";
@@ -117,6 +117,3 @@ begin
   end process ;
 
 end test_bench;
-
-
-
