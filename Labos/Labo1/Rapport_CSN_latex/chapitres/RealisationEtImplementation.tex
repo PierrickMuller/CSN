@@ -1,0 +1,363 @@
+\section{Réalisation et implémentation}
+
+\subsection*{Partie 1 :}
+\par
+Voici l'interface implémenté sur logisim:\\
+\begin{center}
+\includegraphics[scale=0.4]{./images/Full_partie1.png}\\\par
+\captionof{figure}{Implémentation complète partie 1}
+\end{center}
+
+L'interface contient un bloc appelé user\_addr\_dec (En jaune sur la figure ci-dessus) qui permet de décoder les adresses et de définir les actions que l'interface doit entreprendre. Je vais commencer par préciser les informations relatives à ce bloc : \\
+\begin{center}
+\includegraphics[scale=0.4]{./images/decod_partie1.png}\\\par
+\captionof{figure}{Bloc decod}
+\end{center}\par
+J'ai séparer le bloc en trois blocs plus petits, indiqués par les carrés de couleurs transparents ci-dessus. Le bloc rouge représente les entrées du bloc, soit :
+\begin{itemize}
+\item cs\_wr\_i qui représente la demande du cpu d'effectuer une écriture sur une sortie
+\item wr\_en\_i qui nous permet de nous assurer de l'intégrité des données à écrire
+\item cs\_rd\_i qui représente la demande du cpu d'effectuer une lecture sur une entrée ou une sortie
+\item adrr\_i qui correspond à l'adresse fournit par le CPU\\
+\end{itemize}\par
+Le bloc jaune représente les sorties du bloc avec notamment les deux chip select pour l'écriture des leds et de l'afficheur 7 segments, les trois bits de sélection de l'entrée à lire et le chip select de lecture qui permet d'activer la lecture d'une entrée.\\\par
+Le bloc bleu représente la logique permettant d'activer ou non le chip select de lecture des entrées. On regarde si on est bien dans la zone ou nous avons définis nos entrées/sortie en comparant les bits de l'adresse avec la valeur d'adresse commune à nos entrée/sortie (0x00000), étant donnée que les 9 bits de poids fort coté CPU n'ont pas été transféré à l'interface. En plus d'effectuer cette comparaison, on s'assure que le cpu veux bien lire quelque chose sur l'interface en contrôlant l'état de cs\_rd\_i. Le contrôle de la comparaison et du signal cité plus haut nous permet d'obtenir un chip select nous permettant d'être sure qu'une des entrée/sortie veuille être lu (Dans cette première partie, juste les entrée, la relecture des leds n'étant pas encore implémenté).\\\par
+Finalement, le bloc vert nous permet de gérer l'écriture des sorties. A l'aide d'un demultiplexeur et des bits de sélections de notre interface (Les trois bits de poid faibles, qui correspondent après le passage de l'adresse du CPU à l'interface aux 4 derniers bits de l'adresse divisé par deux (0 = 0,2 = 1, 4 = 2,6 = 3...)), on active les chip select correspondants, en s'assurant a chaque fois que le CPU veut bien écrire sur ces sorties(cs\_wr\_i et wr\_en\_i actif).\\\par
+
+Voila pour l'implémentation du décodeur. Les principaux problèmes rencontré dans cette implémentation venait de la compréhension des changements d'état de l'adresse entre le CPU et l'interface.\\\par
+
+La gestion des sorties est fait de la manière suivante : \\
+\begin{center}
+\includegraphics[scale=0.8]{./images/Sorties_partie1.png}\\\par
+\captionof{figure}{Gestion des sorties}
+\end{center}\par
+Conformément à notre plan d'adressage, on prend toujours les 8 bits de poids faibles pour l'écriture sur une sortie, les 8 bits de poids fort devant être set à 0. Les chip selects sont ceux fournis par le décodeur d'adresse et les registres permettent de garder l'état des sorties.\\\par
+
+La gestion des entrées est effectué de la manière suivante : \\
+\begin{center}
+\includegraphics[scale=0.6]{./images/Entree_partie1.png}\\\par
+\captionof{figure}{Gestion des entrées}
+\end{center}\par
+Lors de l'implémentation, au lieu des portes trois états, nous avons un multiplexeur qui permet de définir quel entrée nous voulons lire. Le bus de sélection du multiplexeur vient du bloc decod et nous permet donc de choisir l'entrée à lire, a condition que le chip select de rd soit actif. Derrière, la valeur de l'entrée est stockée dans un registre qui est actif grâce à rd\_en, signal sur lequel nous reviendrons plus tard dans ce rapport.\\\par
+
+Voila pour l'implémentation du schéma sur logisim. Je vais maintenant passer à l'implémentation du programme C. Je laisse ci-dessous l'implémentation finale du programme C:
+
+\begin{lstlisting}[language=C]
+/**************************************************************
+ * HEIG-VD, Institut REDS
+ *
+ * File       : labo2_io_fpga.c (Adaptation du filchier reptar_fpga_std.c)
+ * Author     : Alexandre MALKI
+ * Created on : 09.03.2017
+ *
+ * Description  : Programme c pour le labo2 io fpga sp6.
+ *                Realisation d'une application avec les io de la fpga
+ *
+ *************************************************************
+ * Ver  Date        Author     Description
+ * 0.4  09.03.2017  AMX        Adaptation pour le labo2 io fpga
+ *
+ *
+ *************************************************************
+ * Modifié le : 28.03.2019
+ * Par        : Pierrick Muller
+ *
+ *************************************************************
+ */
+
+#include <common.h>
+
+typedef volatile unsigned short vushort;
+
+/*Les acces a la FPGA sont sur 16 bits. Il faut utiliser un type short */
+/*Le type volatile indique que cette donnee ne peut pas etre mise dans le cash*/
+/*ADDRESSES DU PLAN D'ADDRESSAGE*/
+#define FPGA_SP6_BASE_ADDR      0x19000000
+#define FPGA_SP6_CST            *(vushort *)(FPGA_SP6_BASE_ADDR)
+#define FPGA_SP6_BUTTONS        *(vushort *)(FPGA_SP6_BASE_ADDR + 0x2)
+#define FPGA_SP6_LEDS           *(vushort *)(FPGA_SP6_BASE_ADDR + 0x4)
+#define FPGA_SP6_AFF7SEG        *(vushort *)(FPGA_SP6_BASE_ADDR + 0x6)
+
+/*MASQUE*/
+#define MASK_8BITS              0xFF
+#define MASK_SW_3               0x4
+#define MASK_ROUND              0x20
+#define MASK_AFF_G              0x40
+
+/* Adresse pour les acces de SW4 du CPU */
+#define GPIO_DATAIN_REGISTER_BANK4  *(volatile unsigned int *) (0x49054038)
+#define MASK_SW_4                                               0x40000000
+
+
+/* Uniquement declaration des fonctions ici ! */
+void delay(unsigned int time);
+
+int lab2_io_fpga(void)
+{
+	  //Variables utilitaires
+      vushort constProg = FPGA_SP6_CST;
+      vushort tempAff = 0;
+      vushort tempAffMid = 0;
+      uchar stateSw3 = 0;
+	  
+	  //Réinitialisationd des sorties à 0
+      FPGA_SP6_AFF7SEG &= ~MASK_8BITS;
+      FPGA_SP6_LEDS &= ~MASK_8BITS;
+
+      printf("Uboot: Reptar io fpga sp6\n");
+	  //Affichage de la constante
+      printf("Const offset 0x0000 : %d (0x%04x)\n", constProg, constProg);
+
+/*Quitte l'application quand le SW4 du CPU est presse*/
+      while (!(GPIO_DATAIN_REGISTER_BANK4 & MASK_SW_4)) {
+		
+		//Gestion de la copie de l'état des boutons SW sur les leds
+        if((FPGA_SP6_BUTTONS & MASK_8BITS) != (FPGA_SP6_LEDS & MASK_8BITS))
+        {
+          FPGA_SP6_LEDS = (FPGA_SP6_BUTTONS & MASK_8BITS);
+        }
+        else
+        {
+          FPGA_SP6_LEDS = 0x0;
+        }
+
+		//Gestion de l'affichage sur l'afficheur 7 segments
+        if((FPGA_SP6_BUTTONS & MASK_SW_3))
+        {
+		  //Permet de ne considérer qu'un appui tant que le bouton n'a pas été relaché
+          if(stateSw3 == 0)
+          {
+            stateSw3 = 1;
+			// Gestion de la transition milieu allumé/milieu éteint
+            if((tempAff & MASK_ROUND) == MASK_ROUND)
+            {
+              tempAffMid ^= MASK_AFF_G;
+              tempAff = 1;
+              FPGA_SP6_AFF7SEG = tempAffMid | tempAff;
+              
+            }
+            else
+            {
+			  //Gestion de l'affichage du tour de l'afficheur 7 segement 
+              if(tempAff == 0)
+              {
+					tempAff = 1;
+			  }
+			  else
+			  {
+					tempAff = (tempAff << 1) ;
+			  }
+              
+              FPGA_SP6_AFF7SEG = tempAff | tempAffMid;
+            }
+          }
+          //Gestion des problèmes de bouncings
+          delay(1000000);
+        }
+        else
+        {
+          stateSw3 = 0;
+        }
+
+      }
+
+      return (0);
+}
+
+/* Definition des fonctions ici */
+void delay(unsigned int time)
+{
+  unsigned int i = 0;
+  while(i < time)
+  {
+    i++;
+  }
+}
+\end{lstlisting} \par
+
+La différence entre le code de base et le code avec solution logicielle permettant d'éviter les sauts de l'afficheur 7 segments vient de l'utilisation de la fonction delay dans la solution finale qui permet d'éviter les rebonds en s'assurant que l'appui à bien été effectuer.\\\par 
+Voila qui clôture l'implémentation de la partie 1. Si peu de difficultés ont été rencontrée dans la partie "Implémentation Logisim", l'écriture du code à apporté plus de problèmes. La gestion de l'appui du bouton avec une variable permettant de s'assurer que le bouton n'exécute pas plusieurs fois l'action d'afficher une un segment sur l'afficheur 7 segment à demander du temps de réflexion pour comprendre d'où venait le problème. Finalement, le programme est fonctionnel et a été contrôlé en séance de laboratoire.
+\subsection*{Partie 2 :}
+\par
+Voici l'interface modifié pour ajouter les nouvelles fonctionnalités:\\
+\begin{center}
+\includegraphics[scale=0.5]{./images/Full_partie2.png}\\\par
+\captionof{figure}{Implémentation complète partie 2}
+\end{center}\par
+Les deux fonctionnalités ont été ajouté, en rouge ci-dessus la relecture des leds, et en vert la gestion du bit d'état interne concernant la pression du bouton SW5. Pour la relecture des leds, nous avons juste relié l'état de la sortie LED aux entrées, conformément au plan d'adressage.\\
+\par
+Le bloc vert (Gest\_SW5\_Bloc) contient le système suivant:\\
+\begin{center}
+\includegraphics[scale=0.6]{./images/gestSW5_partie2.png}\\\par
+\captionof{figure}{Bloc gestion SW5}
+\end{center}
+\par
+Les différentes entrées sont les suivantes : 
+\begin{itemize}
+\item reset : Le signal reset de l'interface
+\item Switch\_i : L'état des switch, d'où on va extraire le bit 4 qui correspond au SW5
+\item clk : L'horloge du système
+\item res\_sw5 : Un signal correspondant à un AND entre cs\_wr\_i et wr\_en\_i qui sont des signaux de l'interface
+\item sel\_zone\_adr : Zone d'adresse dans laquelle on veut lire / écrire. On regarde si elle correspond à la valeur 4 qui correspond à l'adresse de notre flag dans le plan d'adressage (4 -> 8).\\
+\end{itemize}
+\par
+On utilise une détection de flanc montant afin d'activer le bit d'état si le bouton SW5 est pressé. On utilise pour stocker l'état de ce bit d'état un S-R Flip-Flop qui permet d'avoir un reset synchrone lorsque l'on souhaite désactiver notre bit d'état. Comme dis dans la partie d'analyse, l'écriture dans la zone acquitSW5 va permettre de reset notre bit d'état. \\
+\par
+Voila pour l'implémentation des fonctionnalités supplémentaires de l'interface. Maintenant, pour la partie logicielle, voila ce que j'ai conçu: \\
+
+\begin{lstlisting}[language=C]
+/**************************************************************
+ * HEIG-VD, Institut REDS
+ *
+ * File       : labo2_io_fpga.c (Adaptation du filchier reptar_fpga_std.c)
+ * Author     : Alexandre MALKI
+ * Created on : 09.03.2017
+ *
+ * Description  : Programme c pour le labo2 io fpga sp6.
+ *                Realisation d'une application avec les io de la fpga
+ *
+ *************************************************************
+ * Ver  Date        Author     Description
+ * 0.4  09.03.2017  AMX        Adaptation pour le labo2 io fpga
+ *
+ *
+ *************************************************************
+ * Modifié le : 01.04.2019
+ * Par        : Pierrick Muller
+ *
+ *************************************************************
+ */
+
+#include <common.h>
+
+typedef volatile unsigned short vushort;
+
+/*Les acces a la FPGA sont sur 16 bits. Il faut utiliser un type short */
+/*Le type volatile indique que cette donnee ne peut pas etre mise dans le cash*/
+/*ADDRESSES DU PLAN D'ADDRESSAGE SP6*/
+#define FPGA_SP6_BASE_ADDR      0x19000000
+#define FPGA_SP6_CST            *(vushort *)(FPGA_SP6_BASE_ADDR)
+#define FPGA_SP6_BUTTONS        *(vushort *)(FPGA_SP6_BASE_ADDR + 0x2)
+#define FPGA_SP6_LEDS           *(vushort *)(FPGA_SP6_BASE_ADDR + 0x4)
+#define FPGA_SP6_AFF7SEG        *(vushort *)(FPGA_SP6_BASE_ADDR + 0x6)
+#define FPGA_SP6_FLAG_SW5		*(vushort *)(FPGA_SP6_BASE_ADDR + 0x8)
+
+/*ADDRESSES DU PLAN D'ADDRESSAGE SP3*/
+#define FPGA_SP3_BASE_ADDR      0x1A000000
+#define FPGA_SP3_BUTSWITCH 	*(vushort *)(FPGA_SP3_BASE_ADDR + 0x0A)
+
+
+/*MASQUE SP6*/
+#define MASK_8BITS              0xFF
+#define MASK_SW_3               0x4
+#define MASK_ROUND              0x20
+#define MASK_AFF_G              0x40
+
+/*MASQUE SP3*/
+#define MASK_SW_SP3_7			0x40
+  /* Creer les define nécessaires pour votre programme                */
+
+
+
+/* Adresse pour les acces de SW4 du CPU */
+#define GPIO_DATAIN_REGISTER_BANK4  *(volatile unsigned int *) (0x49054038)
+#define MASK_SW_4                                               0x40000000
+
+
+/* Uniquement declaration des fonctions ici ! */
+void delay(unsigned int time);
+
+int lab2_io_fpga(void)
+{
+	  //Variables utilitaires
+      vushort constProg = FPGA_SP6_CST;
+      vushort tempAff = 0;
+      vushort tempAffMid = 0;
+      uchar stateSw3 = 0;
+
+	  //Réinitialisation des sorties
+      FPGA_SP6_AFF7SEG &= ~MASK_8BITS;
+      FPGA_SP6_LEDS &= ~MASK_8BITS;
+
+	  //Affichage de la constante
+      printf("Uboot: Reptar io fpga sp6\n");
+      printf("Const offset 0x0000 : %d (0x%04x)\n", constProg, constProg);
+
+/*Quitte l'application quand le SW4 du CPU est presse*/
+      while (!(GPIO_DATAIN_REGISTER_BANK4 & MASK_SW_4)) {
+
+		//Gestion de l'appui sur un bouton pour les leds
+        if((FPGA_SP6_BUTTONS & MASK_8BITS) != 0x0)
+        {
+			  //Allumage ou eteignage en fonction de l'état de SW7 de la SP3
+    		  if((FPGA_SP3_BUTSWITCH & MASK_SW_SP3_7) == MASK_SW_SP3_7)
+    		  {
+    			  FPGA_SP6_LEDS |= (FPGA_SP6_BUTTONS & MASK_8BITS);
+    		  }
+    		  else
+    		  {
+    			  FPGA_SP6_LEDS &= ~(FPGA_SP6_BUTTONS & MASK_8BITS);
+    		  }
+
+        }
+
+		//Gestion de l'afficheur 7 segment
+        if((FPGA_SP6_BUTTONS & MASK_SW_3) || (FPGA_SP6_FLAG_SW5 == 1))
+        {
+		  //On s'assure que l'appui du bouton ne compte pas plusieurs fois et on controlle que l'appui ne soit pas bloquant
+          if(stateSw3 == 0 || (FPGA_SP6_FLAG_SW5 == 1))
+          {
+            stateSw3 = 1;
+			
+			//Gestion du segment du milieu
+            if((tempAff & MASK_ROUND) == MASK_ROUND)
+            {
+              tempAffMid ^= MASK_AFF_G;
+              tempAff = 1;
+              FPGA_SP6_AFF7SEG = tempAffMid | tempAff;
+            }
+            else
+            {
+				//Gestion de l'avancement du tour
+              if(tempAff == 0)
+              {
+					           tempAff = 1;
+			        }
+			        else
+			        {
+					           tempAff = (tempAff << 1) ;//+ 1;
+			        }
+              FPGA_SP6_AFF7SEG = tempAff | tempAffMid;
+            }
+			//Permet d'eviter les sauts
+            delay(15000000);
+			//Acquittement du flag (0xFF peut être une autre valeur, ce qui compte c'est d'écrire à cette adresse
+            FPGA_SP6_FLAG_SW5 = 0xFF;
+          }
+		  //Permet d'eviter les sauts
+          delay(15000);
+
+        }
+        else
+        {
+          stateSw3 = 0;
+        }
+
+      }
+
+      return (0);
+}
+
+//Fonction permettant d'effectuer une attente.
+void delay(unsigned int time)
+{
+  unsigned int i = 0;
+  while(i < time)
+  {
+    i++;
+  }
+}
+
+\end{lstlisting}\par
+Le programme ressemble beaucoup au programme de base, du moins dans sa deuxième partie (Gestion affichage 7 segments). les difficultés concernant ce programme venait de l'équilibrage du temps de délai nécessaire pour éviter que les sauts existent et de la gestion du fait que l'appui sur SW3 était bloquant. En effet, étant donné la gestion des appuis multiples avec la variable stateSw3, le programme bloquait l'appui sur SW5 et l'avancement de l'afficheur 7 segment. En s'assurant que l'état stateSw3 est à 0 ou que le flag SW5 est actif, on peut s'arranger pour que l'appui sur SW3 ne soit pas bloquant. C'est donc la solution qui à été choisie.\\\par
+Voila ce qui clôt l'implémentation logicielle et physique de cette partie 2. Passons maintenant aux différentes simulations qui ont été effectuées.
