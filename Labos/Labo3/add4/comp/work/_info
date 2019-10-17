@@ -1,0 +1,93 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/cours_REDS/CSN/PierrickMuller/CSN/Labos/Labo3/add4/comp
+Eadd4
+Z1 w1571324025
+Z2 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
+Z3 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z4 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+R0
+Z5 8../src/add4.vhd
+Z6 F../src/add4.vhd
+l0
+L26
+V`7=7f;[_m:7<^79Fbf`Uo2
+!s100 d20FfbQ9eG@a9mGdlg@Pa1
+Z7 OL;C;10.5c_2;63
+32
+Z8 !s110 1571324419
+!i10b 1
+Z9 !s108 1571324419.000000
+Z10 !s90 -reportprogress|300|-work|work|../src/add4.vhd|
+Z11 !s107 ../src/add4.vhd|
+!i113 0
+Z12 o-work work
+Z13 tExplicit 1 CvgOpt 0
+Aflot_don
+R2
+R3
+R4
+Z14 DEx4 work 4 add4 0 22 `7=7f;[_m:7<^79Fbf`Uo2
+32
+R8
+l43
+L35
+VOWmH7IQHe9Yh8]FAPhA:k2
+!s100 chl<NH:ZRLm2bUDL_2?1j3
+R7
+!i10b 1
+R9
+R10
+R11
+!i113 0
+R12
+R13
+Eadd4_tb
+Z15 w1488806627
+R2
+R3
+R4
+R0
+Z16 8../src_tb/add4_c_tb.vhd
+Z17 F../src_tb/add4_c_tb.vhd
+l0
+L27
+ViZ3@L00TA^?cIK<4kYWEP1
+!s100 ;n7[6g`0POEgBWXbn1@`J0
+R7
+32
+R8
+!i10b 1
+R9
+Z18 !s90 -reportprogress|300|-work|work|../src_tb/add4_c_tb.vhd|
+Z19 !s107 ../src_tb/add4_c_tb.vhd|
+!i113 0
+R12
+R13
+Atest_bench_carry
+R14
+R2
+R3
+R4
+DEx4 work 7 add4_tb 0 22 iZ3@L00TA^?cIK<4kYWEP1
+32
+R8
+l73
+L35
+VB7OgV?74[KCi57zQBV3=<3
+!s100 cZi2oMd<0b^LOTObVHcgV0
+R7
+!i10b 1
+R9
+R18
+R19
+!i113 0
+R12
+R13

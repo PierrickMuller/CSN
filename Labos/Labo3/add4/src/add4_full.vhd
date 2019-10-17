@@ -38,7 +38,6 @@ architecture flot_don of add4 is
   signal nbr_a_s, nbr_b_s : unsigned(4 downto 0);
   signal somme_s          : unsigned(4 downto 0);
   signal cin_s            : unsigned(4 downto 0);
-  
   --component declaration
 
 begin
