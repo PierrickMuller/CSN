@@ -38,16 +38,19 @@ architecture flot_don of add4 is
   signal nbr_a_s, nbr_b_s : unsigned(4 downto 0);
   signal somme_s          : unsigned(4 downto 0);
   signal cin_s            : unsigned(4 downto 0);
-  
+
   --component declaration
 
 begin
+  --Assignation des signaux
   cin_s   <= "0000" & cin_i;
   nbr_a_s <= '0' & unsigned(nbr_a_i);
   nbr_b_s <= '0' & unsigned(nbr_b_i);
 
+  --Calul de la somme
   somme_s <= nbr_a_s + nbr_b_s + cin_s;
 
+  -- Assignation des sorties
   somme_o <= std_logic_vector(somme_s(3 downto 0));
   cout_o <= somme_s(4);
 end flot_don;

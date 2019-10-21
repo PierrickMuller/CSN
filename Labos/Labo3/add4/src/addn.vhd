@@ -42,13 +42,16 @@ architecture flot_don of addn is
   --component declaration
 
 begin
+
+  -- Initialisation des signaux
   cin_s   <= (0 => cin_i, others => '0');
-  
   nbr_a_s <= '0' & unsigned(nbr_a_i);
   nbr_b_s <= '0' & unsigned(nbr_b_i);
 
+  -- Calcul de la somme
   somme_s <= nbr_a_s + nbr_b_s + cin_s;
 
+  -- Assignation des sorties
   somme_o <= std_logic_vector(somme_s(N_g-1 downto 0));
   cout_o <= somme_s(N_g);
 end flot_don;
