@@ -10,7 +10,7 @@
 -----------------------------------------------------------------------
 -- Ver  Date       Qui  Commentaires
 -- 1.0  31.03.2019 EMI  Solution
---
+-- 1.1  31.10.2019 Pierrick Muller Résolution
 -----------------------------------------------------------------------
 
 library IEEE;
@@ -56,19 +56,19 @@ begin
     case adr_i(15 downto 12) is
       when "0000"                                         => cs_rom_o    <= '1';  -- ROM
       when "0001"|"0010"|"0011"|"0100"                    => null ;               -- libre
-      when "0101"|"0110"|"0111"                           => cs_ram_o    <= '1';
-      when "1000"|"1001"                                  => cs_flash_o  <= '1';
+      when "0101"|"0110"|"0111"                           => cs_ram_o    <= '1';  -- Ram
+      when "1000"|"1001"                                  => cs_flash_o  <= '1';  -- Flash
       when "1010"|"1011"|"1100"|"1101"|"1110"             => null ;               -- libre
-      when "1111"                                         => cs_io_o <= '1';
+      when "1111"                                         => cs_io_o <= '1';      -- IO
       if adr_i(11 downto 8) = "0000" then
         case adr_i(7 downto 4) is
-          when "0000"                                       => cs_leds_o <= '1';
-          when "0001"                                       => cs_switch_o <= '1';
-          when "0010"|"0011"                                => cs_matrice_led_o <= '1';
-          when "0100"|"0101"|"0110"|"0111"|"1000"|"1001"    => null;
-          when "1010"|"1011"                                => cs_capt_analog_o <= '1';
-          when "1100"|"1101"                                => cs_cmd_moteur_o <= '1';
-          when others                                         => null;
+          when "0000"                                       => cs_leds_o <= '1';  -- Leds
+          when "0001"                                       => cs_switch_o <= '1'; -- Switchs
+          when "0010"|"0011"                                => cs_matrice_led_o <= '1'; -- Matrice leds
+          when "0100"|"0101"|"0110"|"0111"|"1000"|"1001"    => null;  --Libre
+          when "1010"|"1011"                                => cs_capt_analog_o <= '1'; --Capteur analogique
+          when "1100"|"1101"                                => cs_cmd_moteur_o <= '1'; --Commande moteur
+          when others                                         => null; --Libre
         end case;
       else
         null;   -- libre

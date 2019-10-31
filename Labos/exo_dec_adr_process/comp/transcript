@@ -4221,3 +4221,5 @@ run -all
 #    Time: 6553600 ns  Iteration: 0  Instance: /exo_dec_adr_process_tb
 # ** Note:  *** BRAVO, pas d'erreur *** 
 #    Time: 6553600 ns  Iteration: 0  Instance: /exo_dec_adr_process_tb
+# End time: 17:41:33 on Oct 31,2019, Elapsed time: 0:08:29
+# Errors: 0, Warnings: 0
