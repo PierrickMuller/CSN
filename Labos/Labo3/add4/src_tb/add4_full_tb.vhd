@@ -2,21 +2,21 @@
 -- HEIG-VD, Haute Ecole d'Ingenierie et de Gestion du canton de Vaud
 -- Institut REDS, Reconfigurable & Embedded Digital Systems
 --
--- Fichier      : add4_full_tb.vhd                                             
+-- Fichier      : add4_full_tb.vhd
 -- Description  : Testbench pour la simulation du fichier add4.vhd
---                                                                              
+--
 -- Auteur       : E. Messerli
 -- Date         : 10.10.2014
 -- Version      : 1.0
 --
--- Utilise      : Exercice unite CSN & SysLog2 
---                                                                              
+-- Utilise      : Exercice unite CSN & SysLog2
+--
 --| Modifications |-----------------------------------------------------------
--- Ver   Auteur       Date        Description                              
+-- Ver   Auteur       Date        Description
 -- 2.0   G. Matthey   16.10.2015  Ajout test signal Overflow (ovr_o)
 -- 2.1   E. Messerli  21.10.2015  Mis a jour commentaire generation ovr_ref
---                                et modifie nom achitecture add4: struct 
--- 2.2   E. Messerli  03-03-2016  Modifier nom entité tb et add4
+--                                et modifie nom achitecture add4: struct
+-- 2.2   E. Messerli  03-03-2016  Modifier nom entitï¿½ tb et add4
 -- 2.3   E. Messerli  06-03-2017  Modifier nom architecture
 --
 ------------------------------------------------------------------------------
@@ -24,18 +24,18 @@
 library IEEE;
   use IEEE.Std_Logic_1164.all;
   use IEEE.Numeric_Std.all;
-  
+
 entity add4_tb is
 
 end add4_tb;
 
 ------------------------------------------------------------------------
--- Architecture du testbench VHDL 
+-- Architecture du testbench VHDL
 ------------------------------------------------------------------------
 
 architecture test_bench_full of add4_tb is
 
-  component add4 
+  component add4_full
     port (nbr_a_i   : in  std_logic_Vector(3 downto 0);
           nbr_b_i   : in  std_logic_Vector(3 downto 0);
           cin_i      : in  std_logic;
@@ -44,12 +44,12 @@ architecture test_bench_full of add4_tb is
           ovr_o      : out std_logic  );
   end component;
 
-  for all : add4 use entity work.add4;
+  for all : add4_full use entity work.add4_full;
 
   -- constantes internes au test-bench
   constant Pas_Sim_c   : time := 100 ns;
   constant Pulse_c     : time := 4 ns;
-  constant Unite_Min_c : time := 1 ns; -- valeur du simulateur  
+  constant Unite_Min_c : time := 1 ns; -- valeur du simulateur
 
   -- constante donnant la taille de l'additionneur
   constant N : integer := 4;
@@ -64,19 +64,19 @@ architecture test_bench_full of add4_tb is
   signal Somme_obs : Std_Logic_Vector(N-1 downto 0);
   signal Cout_obs  : Std_Logic;
   signal Ovr_obs   : Std_Logic;
-  
+
   -- signaux de reference
   signal Somme_ref : Std_Logic_Vector(N-1 downto 0);
   signal Cout_ref  : Std_Logic;
   signal Ovr_ref   : Std_Logic;
-  
+
 
 begin
 
   ---------------------------------------------------------------------------
   -- Interconnexion du module VHDL a simuler
   ---------------------------------------------------------------------------
-  uut: add4 port map (Nbr_A_i   => Nbr_A_sti,
+  uut: add4_full port map (Nbr_A_i   => Nbr_A_sti,
                       Nbr_B_i   => nbr_B_sti,
                       Cin_i     => Cin_sti,
                       Somme_o   => Somme_obs,
@@ -96,11 +96,11 @@ begin
     variable S_n_1    : unsigned(2 downto 0);
 
   begin
-    
-    --initialisation
-    Nbr_Err_v := 0; 
 
-    report "Début de la simulation";
+    --initialisation
+    Nbr_Err_v := 0;
+
+    report "Dï¿½but de la simulation";
 
     for I_NbrA in 0 to 2**N-1 loop
       for I_NbrB in 0 to 2**N-1 loop
@@ -120,10 +120,10 @@ begin
           if Somme_int > (2**N-1) then
             Cout_int := '1';
             Somme_int := Somme_int - (2**N);
-          else 
+          else
             Cout_int := '0';
           end if;
-          
+
           --Cas de depassement signe Overflow:
           -- si meme signe (I_NbrA et I_NbrB) et signe different de Somme_int => overflow
           -- cas positif: I_NbrA < 2**(N-1) and I_NbrB < 2**(N-1) and Somme_int>= 2**(N-1) => erreur
@@ -141,7 +141,7 @@ begin
           Cout_ref <= Cout_int;
           Somme_ref <= Std_Logic_Vector(To_Unsigned(Somme_int,N));
 	        Ovr_ref <= Ovr_int;
-          
+
           --Verification des valeurs observes
           --verif. de somme
           wait for Pas_Sim_c/2;
@@ -176,17 +176,12 @@ begin
       end loop;
     end loop;
 
-    report "Nombre d'erreurs détectées = " & integer'image(Nbr_Err_v);
+    report "Nombre d'erreurs dï¿½tectï¿½es = " & integer'image(Nbr_Err_v);
     report "Fin de la simulation";
 
     wait;  --Attente infinie, stop la simulation
 
   end process;
-  
- 
+
+
 end test_bench_full;
-
-
-
-
-
