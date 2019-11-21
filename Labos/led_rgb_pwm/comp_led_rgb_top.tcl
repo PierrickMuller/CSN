@@ -4,7 +4,7 @@
 #
 # Fichier      : comp_led_rgb_top.tcl
 # Description  : Script de compilation des fichiers
-# 
+#
 # Auteur       : Etienne Messerli
 # Date         : 16.11.2015
 #
@@ -13,20 +13,21 @@
 #
 #--| Modifications |--------------------------------------------------------
 # Ver  Aut.  Date   Description
-#                         
+#
 ############################################################################
 
 
-#create library work        
+#create library work
 vlib work
 #map library work to work
 vmap work work
 
 # gen_3pwm files compilation
-vcom -reportprogress 300 -work work   ../src/cpt_div_2n.vhd
-vcom -reportprogress 300 -work work   ../src/cpt_periode_pwm.vhd
-vcom -reportprogress 300 -work work   ../src/cpt_pwm_out.vhd
+# vcom -reportprogress 300 -work work   ../src/cpt_div_2n.vhd
+# vcom -reportprogress 300 -work work   ../src/cpt_periode_pwm.vhd
+# vcom -reportprogress 300 -work work   ../src/cpt_pwm_out.vhd
 vcom -reportprogress 300 -work work   ../src/gen_3pwm.vhd
+vcom -reportprogress 300 -work work   ../src/compteur_10.vhd
 
 # level converter compilation
 vcom -reportprogress 300 -work work   ../src/level_converter.vhd
