@@ -39,42 +39,44 @@ end gen_3pwm;
 architecture struct of gen_3pwm is
 
   --components declaration
-  component compteur_10
-
+  component compteur_N
+  generic(N_CNT : Positive range 1 to 16);
   port (reset_i     : in  std_logic;
        clk_i       : in  std_logic;
-       valeur_compteur_o   : out  std_logic_vector(9 downto 0);
+       val_cnt_o   : out  std_logic_vector(N_CNT-1 downto 0);
        fin_periode_o  : out std_logic
        );
 
   end component;
 
-  for all : compteur_10 use entity work.compteur_10(comport);
+  for all : compteur_N use entity work.compteur_N(comport);
 
  --declaration internal signals
-  signal valeur_compteur_s :  std_logic_vector(9 downto 0);
+  signal val_cnt_s :  std_logic_vector((N_PWM + 2) - 1 downto 0);
   signal fin_periode_s     : std_logic;
   signal pwm_out0_s  :  std_logic;
   signal pwm_out1_s  :  std_logic;
   signal pwm_out2_s  :  std_logic;
-  signal sign_debug  : std_logic_vector(7 downto 0);
+  signal val_cnt_div2_s  : std_logic_vector((N_PWM + 2) - 3 downto 0);
 begin
 
- CPT : compteur_10
+ CPT : compteur_N
+ generic map (N_CNT => N_PWM + 2)
  port map (
        reset_i  => reset_i,
        clk_i  => clk_i,
-       valeur_compteur_o => valeur_compteur_s,
+       val_cnt_o => val_cnt_s,
        fin_periode_o => fin_periode_s
  );
 
- pwm_out0_s <=  '0' when unsigned(level0_i) <= unsigned(valeur_compteur_s(9 downto 2)) else
+ val_cnt_div2_s <= val_cnt_s((val_cnt_s'length - 1) downto 2);
+ pwm_out0_s <=  '0' when unsigned(level0_i) <= unsigned(val_cnt_div2_s) else
                 '1';
- pwm_out1_s <=  '0' when unsigned(level1_i) <= unsigned(valeur_compteur_s(9 downto 2)) else
+ pwm_out1_s <=  '0' when unsigned(level1_i) <= unsigned(val_cnt_div2_s) else
                 '1';
- pwm_out2_s <=  '0' when unsigned(level2_i) <= unsigned(valeur_compteur_s(9 downto 2)) else
+ pwm_out2_s <=  '0' when unsigned(level2_i) <= unsigned(val_cnt_div2_s) else
                 '1';
- sign_debug <= valeur_compteur_s(9 downto 2);
+
  cycle_pwm_o <= fin_periode_s;
 
  pwm_out0_o <= pwm_out0_s;

@@ -27,7 +27,7 @@ vmap work work
 # vcom -reportprogress 300 -work work   ../src/cpt_periode_pwm.vhd
 # vcom -reportprogress 300 -work work   ../src/cpt_pwm_out.vhd
 vcom -reportprogress 300 -work work   ../src/gen_3pwm.vhd
-vcom -reportprogress 300 -work work   ../src/compteur_10.vhd
+vcom -reportprogress 300 -work work   ../src/compteur_N.vhd
 
 # level converter compilation
 vcom -reportprogress 300 -work work   ../src/level_converter.vhd
