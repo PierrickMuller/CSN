@@ -1,0 +1,525 @@
+TimeQuest Timing Analyzer report for gen_3pwm
+Mon Nov 25 09:49:59 2019
+Quartus Prime Version 17.0.0 Build 595 04/25/2017 SJ Standard Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. TimeQuest Timing Analyzer Summary
+  3. Parallel Compilation
+  4. Clocks
+  5. Fmax Summary
+  6. Setup Summary
+  7. Hold Summary
+  8. Recovery Summary
+  9. Removal Summary
+ 10. Minimum Pulse Width Summary
+ 11. Setup: 'Clk_Main_i'
+ 12. Hold: 'Clk_Main_i'
+ 13. Setup Transfers
+ 14. Hold Transfers
+ 15. Report TCCS
+ 16. Report RSKM
+ 17. Unconstrained Paths Summary
+ 18. Clock Status Summary
+ 19. Unconstrained Input Ports
+ 20. Unconstrained Output Ports
+ 21. Unconstrained Input Ports
+ 22. Unconstrained Output Ports
+ 23. TimeQuest Timing Analyzer Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2017  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Intel and sold by Intel or its 
+authorized distributors.  Please refer to the applicable 
+agreement for further details.
+
+
+
++---------------------------------------------------------------------------------+
+; TimeQuest Timing Analyzer Summary                                               ;
++-----------------------+---------------------------------------------------------+
+; Quartus Prime Version ; Version 17.0.0 Build 595 04/25/2017 SJ Standard Edition ;
+; Timing Analyzer       ; TimeQuest                                               ;
+; Revision Name         ; gen_3pwm                                                ;
+; Device Family         ; MAX V                                                   ;
+; Device Name           ; 5M570ZF256C5                                            ;
+; Timing Models         ; Final                                                   ;
+; Delay Model           ; Slow Model                                              ;
+; Rise/Fall Delays      ; Unavailable                                             ;
++-----------------------+---------------------------------------------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 8           ;
+; Maximum allowed            ; 4           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
++----------------------------+-------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clocks                                                                                                                                                                                 ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+----------------+
+; Clock Name ; Type ; Period ; Frequency  ; Rise  ; Fall  ; Duty Cycle ; Divide by ; Multiply by ; Phase ; Offset ; Edge List ; Edge Shift ; Inverted ; Master ; Source ; Targets        ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+----------------+
+; Clk_Main_i ; Base ; 1.000  ; 1000.0 MHz ; 0.000 ; 0.500 ;            ;           ;             ;       ;        ;           ;            ;          ;        ;        ; { Clk_Main_i } ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+----------------+
+
+
++-------------------------------------------------+
+; Fmax Summary                                    ;
++-----------+-----------------+------------+------+
+; Fmax      ; Restricted Fmax ; Clock Name ; Note ;
++-----------+-----------------+------------+------+
+; 92.17 MHz ; 92.17 MHz       ; Clk_Main_i ;      ;
++-----------+-----------------+------------+------+
+This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
+
+
++-------------------------------------+
+; Setup Summary                       ;
++------------+--------+---------------+
+; Clock      ; Slack  ; End Point TNS ;
++------------+--------+---------------+
+; Clk_Main_i ; -9.850 ; -167.813      ;
++------------+--------+---------------+
+
+
++------------------------------------+
+; Hold Summary                       ;
++------------+-------+---------------+
+; Clock      ; Slack ; End Point TNS ;
++------------+-------+---------------+
+; Clk_Main_i ; 3.362 ; 0.000         ;
++------------+-------+---------------+
+
+
+--------------------
+; Recovery Summary ;
+--------------------
+No paths to report.
+
+
+-------------------
+; Removal Summary ;
+-------------------
+No paths to report.
+
+
++-------------------------------------+
+; Minimum Pulse Width Summary         ;
++------------+--------+---------------+
+; Clock      ; Slack  ; End Point TNS ;
++------------+--------+---------------+
+; Clk_Main_i ; -2.289 ; -2.289        ;
++------------+--------+---------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Setup: 'Clk_Main_i'                                                                                                                                                                                                  ;
++--------+-------------------------------------------------------------------+-------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack  ; From Node                                                         ; To Node                                                           ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++--------+-------------------------------------------------------------------+-------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; -9.850 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[4] ; cpt_s[19]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 10.529     ;
+; -9.850 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[4] ; cpt_s[18]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 10.529     ;
+; -9.850 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[4] ; cpt_s[17]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 10.529     ;
+; -9.850 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[4] ; cpt_s[16]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 10.529     ;
+; -9.850 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[4] ; cpt_s[15]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 10.529     ;
+; -9.750 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[4] ; cpt_s[14]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 10.429     ;
+; -9.750 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[4] ; cpt_s[13]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 10.429     ;
+; -9.750 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[4] ; cpt_s[12]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 10.429     ;
+; -9.750 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[4] ; cpt_s[11]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 10.429     ;
+; -9.750 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[4] ; cpt_s[10]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 10.429     ;
+; -8.583 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[1] ; cpt_s[19]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 9.262      ;
+; -8.583 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[1] ; cpt_s[18]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 9.262      ;
+; -8.583 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[1] ; cpt_s[17]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 9.262      ;
+; -8.583 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[1] ; cpt_s[16]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 9.262      ;
+; -8.583 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[1] ; cpt_s[15]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 9.262      ;
+; -8.483 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[1] ; cpt_s[14]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 9.162      ;
+; -8.483 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[1] ; cpt_s[13]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 9.162      ;
+; -8.483 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[1] ; cpt_s[12]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 9.162      ;
+; -8.483 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[1] ; cpt_s[11]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 9.162      ;
+; -8.483 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[1] ; cpt_s[10]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 9.162      ;
+; -8.442 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[2] ; cpt_s[19]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 9.121      ;
+; -8.442 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[2] ; cpt_s[18]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 9.121      ;
+; -8.442 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[2] ; cpt_s[17]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 9.121      ;
+; -8.442 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[2] ; cpt_s[16]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 9.121      ;
+; -8.442 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[2] ; cpt_s[15]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 9.121      ;
+; -8.342 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[2] ; cpt_s[14]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 9.021      ;
+; -8.342 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[2] ; cpt_s[13]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 9.021      ;
+; -8.342 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[2] ; cpt_s[12]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 9.021      ;
+; -8.342 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[2] ; cpt_s[11]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 9.021      ;
+; -8.342 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[2] ; cpt_s[10]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 9.021      ;
+; -8.295 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[6] ; cpt_s[19]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.974      ;
+; -8.295 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[6] ; cpt_s[18]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.974      ;
+; -8.295 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[6] ; cpt_s[17]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.974      ;
+; -8.295 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[6] ; cpt_s[16]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.974      ;
+; -8.295 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[6] ; cpt_s[15]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.974      ;
+; -8.195 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[6] ; cpt_s[14]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.874      ;
+; -8.195 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[6] ; cpt_s[13]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.874      ;
+; -8.195 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[6] ; cpt_s[12]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.874      ;
+; -8.195 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[6] ; cpt_s[11]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.874      ;
+; -8.195 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[6] ; cpt_s[10]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.874      ;
+; -8.181 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[9] ; cpt_s[19]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.860      ;
+; -8.181 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[9] ; cpt_s[18]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.860      ;
+; -8.181 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[9] ; cpt_s[17]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.860      ;
+; -8.181 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[9] ; cpt_s[16]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.860      ;
+; -8.181 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[9] ; cpt_s[15]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.860      ;
+; -8.081 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[9] ; cpt_s[14]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.760      ;
+; -8.081 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[9] ; cpt_s[13]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.760      ;
+; -8.081 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[9] ; cpt_s[12]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.760      ;
+; -8.081 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[9] ; cpt_s[11]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.760      ;
+; -8.081 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[9] ; cpt_s[10]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.760      ;
+; -8.028 ; cpt_s[0]                                                          ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[6] ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.707      ;
+; -8.028 ; cpt_s[0]                                                          ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[7] ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.707      ;
+; -8.028 ; cpt_s[0]                                                          ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[8] ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.707      ;
+; -8.028 ; cpt_s[0]                                                          ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[9] ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.707      ;
+; -7.976 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[5] ; cpt_s[19]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.655      ;
+; -7.976 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[5] ; cpt_s[18]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.655      ;
+; -7.976 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[5] ; cpt_s[17]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.655      ;
+; -7.976 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[5] ; cpt_s[16]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.655      ;
+; -7.976 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[5] ; cpt_s[15]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.655      ;
+; -7.876 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[5] ; cpt_s[14]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.555      ;
+; -7.876 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[5] ; cpt_s[13]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.555      ;
+; -7.876 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[5] ; cpt_s[12]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.555      ;
+; -7.876 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[5] ; cpt_s[11]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.555      ;
+; -7.876 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[5] ; cpt_s[10]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.555      ;
+; -7.859 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[3] ; cpt_s[19]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.538      ;
+; -7.859 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[3] ; cpt_s[18]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.538      ;
+; -7.859 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[3] ; cpt_s[17]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.538      ;
+; -7.859 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[3] ; cpt_s[16]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.538      ;
+; -7.859 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[3] ; cpt_s[15]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.538      ;
+; -7.770 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[7] ; cpt_s[19]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.449      ;
+; -7.770 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[7] ; cpt_s[18]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.449      ;
+; -7.770 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[7] ; cpt_s[17]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.449      ;
+; -7.770 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[7] ; cpt_s[16]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.449      ;
+; -7.770 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[7] ; cpt_s[15]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.449      ;
+; -7.759 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[3] ; cpt_s[14]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.438      ;
+; -7.759 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[3] ; cpt_s[13]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.438      ;
+; -7.759 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[3] ; cpt_s[12]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.438      ;
+; -7.759 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[3] ; cpt_s[11]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.438      ;
+; -7.759 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[3] ; cpt_s[10]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.438      ;
+; -7.670 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[7] ; cpt_s[14]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.349      ;
+; -7.670 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[7] ; cpt_s[13]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.349      ;
+; -7.670 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[7] ; cpt_s[12]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.349      ;
+; -7.670 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[7] ; cpt_s[11]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.349      ;
+; -7.670 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[7] ; cpt_s[10]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.349      ;
+; -7.527 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[8] ; cpt_s[19]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.206      ;
+; -7.527 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[8] ; cpt_s[18]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.206      ;
+; -7.527 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[8] ; cpt_s[17]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.206      ;
+; -7.527 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[8] ; cpt_s[16]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.206      ;
+; -7.527 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[8] ; cpt_s[15]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.206      ;
+; -7.427 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[8] ; cpt_s[14]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.106      ;
+; -7.427 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[8] ; cpt_s[13]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.106      ;
+; -7.427 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[8] ; cpt_s[12]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.106      ;
+; -7.427 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[8] ; cpt_s[11]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.106      ;
+; -7.427 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[8] ; cpt_s[10]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.106      ;
+; -7.409 ; cpt_s[0]                                                          ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[5] ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 8.088      ;
+; -7.249 ; cpt_s[0]                                                          ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[4] ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 7.928      ;
+; -7.123 ; cpt_s[0]                                                          ; cpt_s[19]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 7.802      ;
+; -7.123 ; cpt_s[0]                                                          ; cpt_s[18]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 7.802      ;
+; -7.123 ; cpt_s[0]                                                          ; cpt_s[17]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 7.802      ;
+; -7.123 ; cpt_s[0]                                                          ; cpt_s[16]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 1.000        ; 0.000      ; 7.802      ;
++--------+-------------------------------------------------------------------+-------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Hold: 'Clk_Main_i'                                                                                                                                                                                                  ;
++-------+-------------------------------------------------------------------+-------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node                                                         ; To Node                                                           ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+-------------------------------------------------------------------+-------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+; 3.362 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[9] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[9] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 3.401      ;
+; 3.375 ; cpt_s[19]                                                         ; cpt_s[19]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 3.414      ;
+; 3.778 ; cpt_s[0]                                                          ; cpt_s[0]                                                          ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 3.817      ;
+; 5.228 ; cpt_s[10]                                                         ; cpt_s[10]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 5.267      ;
+; 5.229 ; cpt_s[17]                                                         ; cpt_s[17]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 5.268      ;
+; 5.241 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[8] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[8] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 5.280      ;
+; 5.243 ; cpt_s[12]                                                         ; cpt_s[12]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 5.282      ;
+; 5.243 ; cpt_s[11]                                                         ; cpt_s[11]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 5.282      ;
+; 5.252 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[1] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[1] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 5.291      ;
+; 5.267 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[3] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[3] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 5.306      ;
+; 5.270 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[2] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[2] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 5.309      ;
+; 5.428 ; cpt_s[18]                                                         ; cpt_s[18]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 5.467      ;
+; 5.428 ; cpt_s[13]                                                         ; cpt_s[13]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 5.467      ;
+; 5.431 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[4] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[4] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 5.470      ;
+; 5.440 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[6] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[6] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 5.479      ;
+; 5.440 ; cpt_s[15]                                                         ; cpt_s[15]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 5.479      ;
+; 5.441 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[5] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[5] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 5.480      ;
+; 5.441 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[7] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[7] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 5.480      ;
+; 5.441 ; cpt_s[16]                                                         ; cpt_s[16]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 5.480      ;
+; 5.441 ; cpt_s[14]                                                         ; cpt_s[14]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 5.480      ;
+; 5.963 ; cpt_s[10]                                                         ; cpt_s[11]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.002      ;
+; 5.964 ; cpt_s[17]                                                         ; cpt_s[18]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.003      ;
+; 5.976 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[8] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[9] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.015      ;
+; 5.978 ; cpt_s[12]                                                         ; cpt_s[13]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.017      ;
+; 5.978 ; cpt_s[11]                                                         ; cpt_s[12]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.017      ;
+; 5.987 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[1] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[2] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.026      ;
+; 6.002 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[3] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[4] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.041      ;
+; 6.005 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[2] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[3] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.044      ;
+; 6.107 ; cpt_s[10]                                                         ; cpt_s[12]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.146      ;
+; 6.108 ; cpt_s[17]                                                         ; cpt_s[19]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.147      ;
+; 6.122 ; cpt_s[12]                                                         ; cpt_s[14]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.161      ;
+; 6.122 ; cpt_s[11]                                                         ; cpt_s[13]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.161      ;
+; 6.131 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[1] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[3] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.170      ;
+; 6.146 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[3] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[5] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.185      ;
+; 6.149 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[2] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[4] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.188      ;
+; 6.251 ; cpt_s[10]                                                         ; cpt_s[13]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.290      ;
+; 6.266 ; cpt_s[11]                                                         ; cpt_s[14]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.305      ;
+; 6.275 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[1] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[4] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.314      ;
+; 6.293 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[2] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[5] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.332      ;
+; 6.395 ; cpt_s[10]                                                         ; cpt_s[14]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.434      ;
+; 6.419 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[1] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[5] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.458      ;
+; 6.430 ; cpt_s[18]                                                         ; cpt_s[19]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.469      ;
+; 6.430 ; cpt_s[13]                                                         ; cpt_s[14]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.469      ;
+; 6.433 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[4] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[5] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.472      ;
+; 6.442 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[6] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[7] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.481      ;
+; 6.442 ; cpt_s[15]                                                         ; cpt_s[16]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.481      ;
+; 6.443 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[7] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[8] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.482      ;
+; 6.443 ; cpt_s[16]                                                         ; cpt_s[17]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.482      ;
+; 6.527 ; cpt_s[0]                                                          ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[1] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.566      ;
+; 6.586 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[6] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[8] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.625      ;
+; 6.586 ; cpt_s[15]                                                         ; cpt_s[17]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.625      ;
+; 6.587 ; cpt_s[16]                                                         ; cpt_s[18]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.626      ;
+; 6.587 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[7] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[9] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.626      ;
+; 6.730 ; cpt_s[15]                                                         ; cpt_s[18]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.769      ;
+; 6.730 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[6] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[9] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.769      ;
+; 6.731 ; cpt_s[16]                                                         ; cpt_s[19]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.770      ;
+; 6.758 ; cpt_s[12]                                                         ; cpt_s[19]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.797      ;
+; 6.758 ; cpt_s[12]                                                         ; cpt_s[18]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.797      ;
+; 6.758 ; cpt_s[12]                                                         ; cpt_s[17]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.797      ;
+; 6.758 ; cpt_s[12]                                                         ; cpt_s[16]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.797      ;
+; 6.758 ; cpt_s[12]                                                         ; cpt_s[15]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.797      ;
+; 6.782 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[3] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[6] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.821      ;
+; 6.782 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[3] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[7] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.821      ;
+; 6.782 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[3] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[8] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.821      ;
+; 6.782 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[3] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[9] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.821      ;
+; 6.874 ; cpt_s[15]                                                         ; cpt_s[19]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.913      ;
+; 6.902 ; cpt_s[11]                                                         ; cpt_s[19]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.941      ;
+; 6.902 ; cpt_s[11]                                                         ; cpt_s[18]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.941      ;
+; 6.902 ; cpt_s[11]                                                         ; cpt_s[17]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.941      ;
+; 6.902 ; cpt_s[11]                                                         ; cpt_s[16]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.941      ;
+; 6.902 ; cpt_s[11]                                                         ; cpt_s[15]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.941      ;
+; 6.929 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[2] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[6] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.968      ;
+; 6.929 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[2] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[7] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.968      ;
+; 6.929 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[2] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[8] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.968      ;
+; 6.929 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[2] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[9] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 6.968      ;
+; 6.998 ; cpt_s[14]                                                         ; cpt_s[19]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 7.037      ;
+; 6.998 ; cpt_s[14]                                                         ; cpt_s[18]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 7.037      ;
+; 6.998 ; cpt_s[14]                                                         ; cpt_s[17]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 7.037      ;
+; 6.998 ; cpt_s[14]                                                         ; cpt_s[16]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 7.037      ;
+; 6.998 ; cpt_s[14]                                                         ; cpt_s[15]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 7.037      ;
+; 6.998 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[5] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[6] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 7.037      ;
+; 6.998 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[5] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[7] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 7.037      ;
+; 6.998 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[5] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[8] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 7.037      ;
+; 6.998 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[5] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[9] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 7.037      ;
+; 7.031 ; cpt_s[10]                                                         ; cpt_s[19]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 7.070      ;
+; 7.031 ; cpt_s[10]                                                         ; cpt_s[18]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 7.070      ;
+; 7.031 ; cpt_s[10]                                                         ; cpt_s[17]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 7.070      ;
+; 7.031 ; cpt_s[10]                                                         ; cpt_s[16]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 7.070      ;
+; 7.031 ; cpt_s[10]                                                         ; cpt_s[15]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 7.070      ;
+; 7.055 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[1] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[6] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 7.094      ;
+; 7.055 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[1] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[7] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 7.094      ;
+; 7.055 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[1] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[8] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 7.094      ;
+; 7.055 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[1] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[9] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 7.094      ;
+; 7.066 ; cpt_s[13]                                                         ; cpt_s[19]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 7.105      ;
+; 7.066 ; cpt_s[13]                                                         ; cpt_s[18]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 7.105      ;
+; 7.066 ; cpt_s[13]                                                         ; cpt_s[17]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 7.105      ;
+; 7.066 ; cpt_s[13]                                                         ; cpt_s[16]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 7.105      ;
+; 7.066 ; cpt_s[13]                                                         ; cpt_s[15]                                                         ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 7.105      ;
+; 7.069 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[4] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[6] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 7.108      ;
+; 7.069 ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[4] ; led_rgb_top:U1|gen_3pwm:Bloc_pwm|compteur_N:CPT|val_cnt_pres_s[7] ; Clk_Main_i   ; Clk_Main_i  ; 0.000        ; 0.000      ; 7.108      ;
++-------+-------------------------------------------------------------------+-------------------------------------------------------------------+--------------+-------------+--------------+------------+------------+
+
+
++---------------------------------------------------------------------+
+; Setup Transfers                                                     ;
++------------+------------+----------+----------+----------+----------+
+; From Clock ; To Clock   ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++------------+------------+----------+----------+----------+----------+
+; Clk_Main_i ; Clk_Main_i ; 370      ; 0        ; 0        ; 0        ;
++------------+------------+----------+----------+----------+----------+
+Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
+
+
++---------------------------------------------------------------------+
+; Hold Transfers                                                      ;
++------------+------------+----------+----------+----------+----------+
+; From Clock ; To Clock   ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++------------+------------+----------+----------+----------+----------+
+; Clk_Main_i ; Clk_Main_i ; 370      ; 0        ; 0        ; 0        ;
++------------+------------+----------+----------+----------+----------+
+Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
+
+
+---------------
+; Report TCCS ;
+---------------
+No dedicated SERDES Transmitter circuitry present in device or used in design
+
+
+---------------
+; Report RSKM ;
+---------------
+No non-DPA dedicated SERDES Receiver circuitry present in device or used in design
+
+
++------------------------------------------------+
+; Unconstrained Paths Summary                    ;
++---------------------------------+-------+------+
+; Property                        ; Setup ; Hold ;
++---------------------------------+-------+------+
+; Illegal Clocks                  ; 0     ; 0    ;
+; Unconstrained Clocks            ; 0     ; 0    ;
+; Unconstrained Input Ports       ; 11    ; 11   ;
+; Unconstrained Input Port Paths  ; 37    ; 37   ;
+; Unconstrained Output Ports      ; 6     ; 6    ;
+; Unconstrained Output Port Paths ; 62    ; 62   ;
++---------------------------------+-------+------+
+
+
++----------------------------------------------+
+; Clock Status Summary                         ;
++------------+------------+------+-------------+
+; Target     ; Clock      ; Type ; Status      ;
++------------+------------+------+-------------+
+; Clk_Main_i ; Clk_Main_i ; Base ; Constrained ;
++------------+------------+------+-------------+
+
+
++-------------------------------------------------------------------------------------------------------+
+; Unconstrained Input Ports                                                                             ;
++----------------+--------------------------------------------------------------------------------------+
+; Input Port     ; Comment                                                                              ;
++----------------+--------------------------------------------------------------------------------------+
+; Con_25p_io[9]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; Con_25p_io[10] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; Con_25p_io[11] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; Con_25p_io[13] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; Con_25p_io[14] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; Con_25p_io[15] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; Switch_i[0]    ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; Switch_i[1]    ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; Switch_i[2]    ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; nButton_i[1]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; nReset_i       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
++----------------+--------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------+
+; Unconstrained Output Ports                                                                              ;
++-----------------+---------------------------------------------------------------------------------------+
+; Output Port     ; Comment                                                                               ;
++-----------------+---------------------------------------------------------------------------------------+
+; Con_80p_io[2]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; Led_RGB_o[0]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; Led_RGB_o[1]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; Led_RGB_o[2]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; nLed_o[0]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; nSeven_Seg_o[7] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
++-----------------+---------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------+
+; Unconstrained Input Ports                                                                             ;
++----------------+--------------------------------------------------------------------------------------+
+; Input Port     ; Comment                                                                              ;
++----------------+--------------------------------------------------------------------------------------+
+; Con_25p_io[9]  ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; Con_25p_io[10] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; Con_25p_io[11] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; Con_25p_io[13] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; Con_25p_io[14] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; Con_25p_io[15] ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; Switch_i[0]    ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; Switch_i[1]    ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; Switch_i[2]    ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; nButton_i[1]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; nReset_i       ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
++----------------+--------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------+
+; Unconstrained Output Ports                                                                              ;
++-----------------+---------------------------------------------------------------------------------------+
+; Output Port     ; Comment                                                                               ;
++-----------------+---------------------------------------------------------------------------------------+
+; Con_80p_io[2]   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; Led_RGB_o[0]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; Led_RGB_o[1]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; Led_RGB_o[2]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; nLed_o[0]       ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; nSeven_Seg_o[7] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
++-----------------+---------------------------------------------------------------------------------------+
+
+
++------------------------------------+
+; TimeQuest Timing Analyzer Messages ;
++------------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime TimeQuest Timing Analyzer
+    Info: Version 17.0.0 Build 595 04/25/2017 SJ Standard Edition
+    Info: Processing started: Mon Nov 25 09:49:58 2019
+Info: Command: quartus_sta gen_3pwm -c gen_3pwm
+Info: qsta_default_script.tcl version: #1
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
+Info (21077): Low junction temperature is 0 degrees C
+Info (21077): High junction temperature is 85 degrees C
+Info (334003): Started post-fitting delay annotation
+Info (334004): Delay annotation completed successfully
+Critical Warning (332012): Synopsys Design Constraints File file not found: 'gen_3pwm.sdc'. A Synopsys Design Constraints File is required by the TimeQuest Timing Analyzer to get proper timing constraints. Without it, the Compiler will not properly optimize the design.
+Info (332142): No user constrained base clocks found in the design. Calling "derive_clocks -period 1.0"
+Info (332105): Deriving Clocks
+    Info (332105): create_clock -period 1.000 -name Clk_Main_i Clk_Main_i
+Info: Found TIMEQUEST_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
+Info: Can't run Report Timing Closure Recommendations. The current device family is not supported.
+Critical Warning (332148): Timing requirements not met
+Info (332146): Worst-case setup slack is -9.850
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):    -9.850            -167.813 Clk_Main_i 
+Info (332146): Worst-case hold slack is 3.362
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):     3.362               0.000 Clk_Main_i 
+Info (332140): No Recovery paths to report
+Info (332140): No Removal paths to report
+Info (332146): Worst-case minimum pulse width slack is -2.289
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):    -2.289              -2.289 Clk_Main_i 
+Info (332001): The selected device family is not supported by the report_metastability command.
+Info (332102): Design is not fully constrained for setup requirements
+Info (332102): Design is not fully constrained for hold requirements
+Info: Quartus Prime TimeQuest Timing Analyzer was successful. 0 errors, 3 warnings
+    Info: Peak virtual memory: 739 megabytes
+    Info: Processing ended: Mon Nov 25 09:49:59 2019
+    Info: Elapsed time: 00:00:01
+    Info: Total CPU time (on all processors): 00:00:00
+
+

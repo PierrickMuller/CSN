@@ -34,11 +34,18 @@ end gestion_mode;
 
 architecture flot_don of gestion_mode is
 
-  --declaration internal signals 
-
+  signal niv_r_s : std_logic_vector(N_LEVEL-1 downto 0);
+  signal niv_b_s : std_logic_vector(N_LEVEL-1 downto 0);
 
 begin
-
-
-
+  niv_r_s <= niv_g_i when m_blanc_i = '1' else
+	     niv_r_i;
+	     
+  niv_b_s <= niv_g_i when m_blanc_i = '1' else 
+	     niv_b_i;
+	     
+  niv_r_o <= niv_r_s;
+  niv_b_o <= niv_b_s;
+  niv_g_o <= niv_g_i; 
+  
 end flot_don;

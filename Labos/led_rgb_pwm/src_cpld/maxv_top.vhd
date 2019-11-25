@@ -18,14 +18,14 @@
 -- Description :
 --   Top of the CPLD
 ------------------------------------------------------------------------------------------
--- Information :  
+-- Information :
 --   30.09.2014  EMI  Adaptation for the aff_min_max lab
 --
 ------------------------------------------------------------------------------------------
 -- Modifications :
 -- Ver   Date        Engineer     Changes
 -- 0.0   See header  GCD          Initial version
--- 1.0   25.09.2014  EMI          Modified to use for CSN lab 
+-- 1.0   25.09.2014  EMI          Modified to use for CSN lab
 -- 1.1   01.10.2014  GHR          Adaptation to use with the Aff_Min_Max.tcl
 --                                and the board Console-USB2 to test circuit
 -- 1.2   11.11.2019  SMS          Update to fit with new version of the lab, ie pwm values
@@ -63,10 +63,10 @@ architecture struct of maxv_top is
 
     --| Intermediate signals |--------------------------------------------------------------
     signal Reset_s          : std_logic;
-    
+
     signal Con_25p_DI_s   : std_logic_vector(Con_25p_io'range);
     signal Con_25p_DO_s   : std_logic_vector(Con_25p_io'range);
-    signal Con_25p_OE_s   : std_logic;
+    signal Con_25p_OE_s   : std_logic_vector(Con_25p_io'range);
     signal Con_80p_DI_s   : std_logic_vector(Con_80p_io'range);
     signal Con_80p_DO_s   : std_logic_vector(Con_80p_io'range);
     signal Con_80p_OE_s   : std_logic_vector(Con_80p_io'range);
@@ -98,16 +98,16 @@ architecture struct of maxv_top is
              cycle_pwm_o  : out Std_Logic            );
     end component;
     for all : led_rgb_top use entity work.led_rgb_top(struct);
-  
+
     signal cycle_pwm_s : std_logic;
-  
+
 begin
 
     ----------------------------------------------------------------------------------------
     --| INPUTS PROCESSING |-----------------------------------------------------------------
     Reset_s <= not nReset_i;
     Button_s <= not nButton_i;
-    
+
     ----------------------------------------------------------------------------------------
     --| OUTPUT PROCESSING |-----------------------------------------------------------------
     nLed_o <= not Led_s;
@@ -115,7 +115,7 @@ begin
 
     --| Tri-state declaration for the 80p connector |----------------------------------------
     Con_80p_OE_s(2)           <= '1'; -- used for cycle_pwm_s check
-    Con_80p_OE_s(79 downto 3) <= (others => '0'); -- used as inputs 
+    Con_80p_OE_s(79 downto 3) <= (others => '0'); -- used as inputs
 
     tri_state_loop: for I in Con_80p_io'right to Con_80p_io'left generate
         Con_80p_io(I) <= Con_80p_DO_s(I) when Con_80p_OE_s(I) = '1' else
@@ -123,7 +123,7 @@ begin
     end generate;
 
     Con_80p_DI_s      <= to_X01(Con_80p_io);
-    
+
     --| Tri-state declaration for the 25p connector |----------------------------------------
     -- the 25poles connector with EINEV 287 console interface:
     -- Tri-state declaration :
@@ -151,11 +151,11 @@ begin
     --Led_RGB_o <= (others => '0');
     --Seven_Seg_s(Seven_Seg_s'high-1 downto 0) <= (others => '0');
     Seven_Seg_s(Seven_Seg_s'high) <= blink_1hz_s; -- decimal point blink at 1Hz
-    --Led_s <= Button_s; --unused leds connected to button 
-    
+    --Led_s <= Button_s; --unused leds connected to button
+
     ----------------------------------------------------------------------------------------
     --| Components intanciation |-----------------------------------------------------------
-    U1: led_rgb_top 
+    U1: led_rgb_top
         generic map(N_PWM => 8)
         port map(
             nReset_i     => nReset_i,
@@ -182,14 +182,13 @@ begin
             cpt_s <= cpt_s +1;
         end if;
     end process;
-    
-    -- signal for test 
+
+    -- signal for test
     blink_1hz_s <= cpt_s(cpt_s'high);
     -- signal ocsl_s generation:
     --     use fonction "cpt_s(9) and cpt_s(8) and cpt_s(7)" to have a frequency from 1KHz
-    ---    with duty cycle of 12% on/ 75% off (25% on: very small difference!) 
-    osc_s <= cpt_s(9) and cpt_s(8) and cpt_s(7); 
+    ---    with duty cycle of 12% on/ 75% off (25% on: very small difference!)
+    osc_s <= cpt_s(9) and cpt_s(8) and cpt_s(7);
 
-  
+
 end struct;
-

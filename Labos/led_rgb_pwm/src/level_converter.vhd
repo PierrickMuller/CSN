@@ -36,18 +36,45 @@ end level_converter;
 
 architecture flot_don of level_converter is
 
-  --internally signals
-
+  signal ton_r_s : std_logic_vector(6 downto 0);
+  signal ton_g_s : std_logic_vector(6 downto 0);
+  signal ton_b_s : std_logic_vector(6 downto 0);
   
-  
-
 begin
 
-
-
-
-
-
+  ton_r_s <= "0000000" when niv_r_i = "000" else 
+	     "0000101" when niv_r_i = "001" else
+	     "0010101" when niv_r_i = "010" else
+	     "0100101" when niv_r_i = "011" else
+	     "0110101" when niv_r_i = "100" else
+	     "1000101" when niv_r_i = "101" else
+	     "1010101" when niv_r_i = "110" else
+	     "1100101" when niv_r_i = "111" else 
+	     "-------";
+  
+  ton_g_s <= "0000000" when niv_g_i = "000" else 
+	     "0000101" when niv_g_i = "001" else
+	     "0010101" when niv_g_i = "010" else
+	     "0100101" when niv_g_i = "011" else
+	     "0110101" when niv_g_i = "100" else
+	     "1000101" when niv_g_i = "101" else
+	     "1010101" when niv_g_i = "110" else
+	     "1100101" when niv_g_i = "111" else 
+	     "-------";
+	     
+  ton_b_s <= "0000000" when niv_b_i = "000" else 
+	     "0000101" when niv_b_i = "001" else
+	     "0010101" when niv_b_i = "010" else
+	     "0100101" when niv_b_i = "011" else
+	     "0110101" when niv_b_i = "100" else
+	     "1000101" when niv_b_i = "101" else
+	     "1010101" when niv_b_i = "110" else
+	     "1100101" when niv_b_i = "111" else 
+	     "-------";
+	     
+  ton_r_o <= '0' & ton_r_s;
+  ton_g_o <= '0' & ton_g_s;
+  ton_b_o <= '0' & ton_b_s;
 
 
 end flot_don;
