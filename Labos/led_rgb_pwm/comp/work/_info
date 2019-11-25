@@ -27,8 +27,9 @@ R1
 R2
 n@_opt1
 R3
+R0
 Ecompteur_n
-Z4 w1574433701
+Z4 w1574673877
 Z5 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
 Z6 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
 Z7 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
@@ -41,9 +42,9 @@ VUCSmU8^Q<ca8MUJYkVmh_3
 !s100 >fU[5c4]E91EYIC00oRDa0
 Z10 OL;C;10.5c_2;63
 32
-Z11 !s110 1574670047
+Z11 !s110 1574673905
 !i10b 1
-Z12 !s108 1574670047.000000
+Z12 !s108 1574673905.000000
 Z13 !s90 -reportprogress|300|-work|work|../src/compteur_N.vhd|
 Z14 !s107 ../src/compteur_N.vhd|
 !i113 0
@@ -69,54 +70,54 @@ R14
 R15
 R16
 Econsole_sim
-Z18 w1574348795
+R4
 R6
 R7
 R0
-Z19 8../src_tb/console_sim.vhd
-Z20 F../src_tb/console_sim.vhd
+Z18 8../src_tb/console_sim.vhd
+Z19 F../src_tb/console_sim.vhd
 l0
 L24
 VmFKXjDS4[FRUY;kZiz?n53
 !s100 O2k:OXL=7_kN=2aHldR^:1
 R10
 32
-R11
+Z20 !s110 1574673906
 !i10b 1
-R12
-Z21 !s90 -reportprogress|300|-work|work|../src_tb/console_sim.vhd|
-Z22 !s107 ../src_tb/console_sim.vhd|
+Z21 !s108 1574673906.000000
+Z22 !s90 -reportprogress|300|-work|work|../src_tb/console_sim.vhd|
+Z23 !s107 ../src_tb/console_sim.vhd|
 !i113 0
 R15
 R16
 Astruct_gen_3pwm
 R5
-Z23 DEx4 work 8 gen_3pwm 0 22 @SkJU?FM`[4i4X[b4lkhE0
+Z24 DEx4 work 8 gen_3pwm 0 22 @SkJU?FM`[4i4X[b4lkhE0
 R6
 R7
-DEx4 work 11 console_sim 0 22 mFKXjDS4[FRUY;kZiz?n53
+Z25 DEx4 work 11 console_sim 0 22 mFKXjDS4[FRUY;kZiz?n53
 l114
 L88
-VzU_@>MYdj@TOB:>^i5gh12
-!s100 <Cc[OfQfaIo4Od3D3^Phi3
+Z26 VzU_@>MYdj@TOB:>^i5gh12
+Z27 !s100 <Cc[OfQfaIo4Od3D3^Phi3
 R10
 32
-R11
+R20
 !i10b 1
-R12
 R21
 R22
+R23
 !i113 0
 R15
 R16
 Egen_3pwm
-Z24 w1574434164
+R4
 R5
 R6
 R7
 R0
-Z25 8../src/gen_3pwm.vhd
-Z26 F../src/gen_3pwm.vhd
+Z28 8../src/gen_3pwm.vhd
+Z29 F../src/gen_3pwm.vhd
 l0
 L25
 V@SkJU?FM`[4i4X[b4lkhE0
@@ -125,9 +126,9 @@ R10
 32
 R11
 !i10b 1
-Z27 !s108 1574670046.000000
-Z28 !s90 -reportprogress|300|-work|work|../src/gen_3pwm.vhd|
-Z29 !s107 ../src/gen_3pwm.vhd|
+R12
+Z30 !s90 -reportprogress|300|-work|work|../src/gen_3pwm.vhd|
+Z31 !s107 ../src/gen_3pwm.vhd|
 !i113 0
 R15
 R16
@@ -136,7 +137,7 @@ R17
 R5
 R6
 R7
-R23
+R24
 l61
 L39
 VEFHhedg[c^dk]EnaAAGg23
@@ -145,31 +146,31 @@ R10
 32
 R11
 !i10b 1
-R27
-R28
-R29
+R12
+R30
+R31
 !i113 0
 R15
 R16
 Egestion_mode
-Z30 w1574592878
+R4
 R5
 R6
 R7
 R0
-Z31 8../src/gestion_mode.vhd
-Z32 F../src/gestion_mode.vhd
+Z32 8../src/gestion_mode.vhd
+Z33 F../src/gestion_mode.vhd
 l0
 L23
 VToJKOUVf<9hNRfJ9WW2l03
 !s100 nlT8DUVaEF0L20I2]5@0z1
 R10
 32
-R11
+R20
 !i10b 1
 R12
-Z33 !s90 -reportprogress|300|-work|work|../src/gestion_mode.vhd|
-Z34 !s107 ../src/gestion_mode.vhd|
+Z34 !s90 -reportprogress|300|-work|work|../src/gestion_mode.vhd|
+Z35 !s107 ../src/gestion_mode.vhd|
 !i113 0
 R15
 R16
@@ -177,42 +178,42 @@ Aflot_don
 R5
 R6
 R7
-Z35 DEx4 work 12 gestion_mode 0 22 ToJKOUVf<9hNRfJ9WW2l03
+Z36 DEx4 work 12 gestion_mode 0 22 ToJKOUVf<9hNRfJ9WW2l03
 l40
 L35
 VljdN03k?5b_BYPKGoXH?K2
 !s100 1ob@Sjcj]SP]WULGDWH=`0
 R10
 32
-R11
+R20
 !i10b 1
 R12
-R33
 R34
+R35
 !i113 0
 R15
 R16
 Eled_rgb_tb
-R18
+R4
 R0
-Z36 8../src_tb/LED_RGB_tb.vhd
-Z37 F../src_tb/LED_RGB_tb.vhd
+Z37 8../src_tb/LED_RGB_tb.vhd
+Z38 F../src_tb/LED_RGB_tb.vhd
 l0
 L40
 VWn:o=[=VJG1ezMV:cJ7zc1
 !s100 FHlL2l[En8[57lS`;HB1`2
 R10
 32
-R11
+R20
 !i10b 1
-R12
-Z38 !s90 -reportprogress|300|-work|work|../src_tb/LED_RGB_tb.vhd|
-Z39 !s107 ../src_tb/LED_RGB_tb.vhd|
+R21
+Z39 !s90 -reportprogress|300|-work|work|../src_tb/LED_RGB_tb.vhd|
+Z40 !s107 ../src_tb/LED_RGB_tb.vhd|
 !i113 0
 R15
 R16
 Atest_bench
-Z40 DEx4 work 11 led_rgb_top 0 22 5]R?QT1jmlGk95UbCbjSm2
+Z41 DEx4 work 11 led_rgb_top 0 22 5]R?QT1jmlGk95UbCbjSm2
 DEx4 work 10 led_rgb_tb 0 22 Wn:o=[=VJG1ezMV:cJ7zc1
 R5
 R6
@@ -223,60 +224,60 @@ V<N<9=<giY3`3RKC5dTCKn0
 !s100 UC0dlS]VnX^2cURIB9f:52
 R10
 32
-R11
+R20
 !i10b 1
-R12
-R38
+R21
 R39
+R40
 !i113 0
 R15
 R16
 Eled_rgb_top
-R18
+R4
 R5
 R6
 R7
 R0
-Z41 8../src/led_rgb_top.vhd
-Z42 F../src/led_rgb_top.vhd
+Z42 8../src/led_rgb_top.vhd
+Z43 F../src/led_rgb_top.vhd
 l0
 L30
 V5]R?QT1jmlGk95UbCbjSm2
 !s100 9A9]U`4nAaSVMCI4^;URF2
 R10
 32
-R11
+R20
 !i10b 1
-R12
-Z43 !s90 -reportprogress|300|-work|work|../src/led_rgb_top.vhd|
-Z44 !s107 ../src/led_rgb_top.vhd|
+R21
+Z44 !s90 -reportprogress|300|-work|work|../src/led_rgb_top.vhd|
+Z45 !s107 ../src/led_rgb_top.vhd|
 !i113 0
 R15
 R16
 Astruct
-Z45 DEx4 work 15 level_converter 0 22 gBL<P897j;_bbh4BYZZgL1
-R23
-R35
+Z46 DEx4 work 15 level_converter 0 22 gBL<P897j;_bbh4BYZZgL1
+R24
+R36
 R5
 R6
 R7
-R40
+R41
 l104
 L46
 VL:P2m>0BQIPZ<fOA]>D:a1
 !s100 ;VJN4KOo4MH0z3jP<GVBI2
 R10
 32
-R11
+R20
 !i10b 1
-R12
-R43
+R21
 R44
+R45
 !i113 0
 R15
 R16
 Elevel_converter
-Z46 w1574594552
+R4
 R5
 R6
 R7
@@ -301,7 +302,7 @@ Aflot_don
 R5
 R6
 R7
-R45
+R46
 l43
 L37
 V^6Q_[[Hh2Y_INjCUJbRb03
