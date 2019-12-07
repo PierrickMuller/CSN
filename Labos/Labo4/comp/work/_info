@@ -1,0 +1,133 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/cours_REDS/CSN/CSN/Labos/Labo4/comp
+Ebloc_comptage_n
+Z1 w1575723885
+Z2 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
+Z3 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z4 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+R0
+Z5 8/cours_REDS/CSN/CSN/Labos/Labo4/src/bloc_comptage_n.vhd
+Z6 F/cours_REDS/CSN/CSN/Labos/Labo4/src/bloc_comptage_n.vhd
+l0
+L18
+VGIBD>CieDMa26TKB1bJzc2
+!s100 ^9SZII5>;RjD]3P2PRZid2
+Z7 OL;C;10.5c_2;63
+32
+Z8 !s110 1575723887
+!i10b 1
+Z9 !s108 1575723887.000000
+Z10 !s90 -reportprogress|300|-work|work|/cours_REDS/CSN/CSN/Labos/Labo4/src/bloc_comptage_n.vhd|
+Z11 !s107 /cours_REDS/CSN/CSN/Labos/Labo4/src/bloc_comptage_n.vhd|
+!i113 0
+Z12 o-work work
+Z13 tExplicit 1 CvgOpt 0
+Acomport
+R2
+R3
+R4
+DEx4 work 15 bloc_comptage_n 0 22 GIBD>CieDMa26TKB1bJzc2
+l37
+L29
+VjQ=j]]D^>O<e`U5g9MH`e0
+!s100 G99IA9N3a]>76;P]CDJX<3
+R7
+32
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 0
+R12
+R13
+Edet_err
+Z14 w1575724516
+R2
+R3
+R4
+R0
+Z15 8/cours_REDS/CSN/CSN/Labos/Labo4/src/det_err.vhd
+Z16 F/cours_REDS/CSN/CSN/Labos/Labo4/src/det_err.vhd
+l0
+L18
+VPe>ofQi=Ooaghz90g`O]22
+!s100 M^cn9JO6D]MfDWZ?aZGaN1
+R7
+32
+Z17 !s110 1575724518
+!i10b 1
+Z18 !s108 1575724518.000000
+Z19 !s90 -reportprogress|300|-work|work|/cours_REDS/CSN/CSN/Labos/Labo4/src/det_err.vhd|
+Z20 !s107 /cours_REDS/CSN/CSN/Labos/Labo4/src/det_err.vhd|
+!i113 0
+R12
+R13
+Acomport
+R2
+R3
+R4
+DEx4 work 7 det_err 0 22 Pe>ofQi=Ooaghz90g`O]22
+l35
+L27
+Vh`W_6Q6E@BU<X_=>UQGJJ2
+!s100 YgN4BCPcY616b=8=DMbYh1
+R7
+32
+R17
+!i10b 1
+R18
+R19
+R20
+!i113 0
+R12
+R13
+Emss
+Z21 w1575730512
+R2
+R3
+R4
+R0
+Z22 8/cours_REDS/CSN/CSN/Labos/Labo4/src/mss.vhd
+Z23 F/cours_REDS/CSN/CSN/Labos/Labo4/src/mss.vhd
+l0
+L17
+VC5l:<BlW=MO6bE^]8?RT90
+!s100 Mdi6ObFNCEjfPSYILUEg:1
+R7
+32
+Z24 !s110 1575730565
+!i10b 1
+Z25 !s108 1575730565.000000
+Z26 !s90 -reportprogress|300|-work|work|/cours_REDS/CSN/CSN/Labos/Labo4/src/mss.vhd|
+Z27 !s107 /cours_REDS/CSN/CSN/Labos/Labo4/src/mss.vhd|
+!i113 0
+R12
+R13
+Am_etat
+R2
+R3
+R4
+Z28 DEx4 work 3 mss 0 22 C5l:<BlW=MO6bE^]8?RT90
+l63
+L28
+VTGQ=T0YYQ0f^5Z]9d87F]1
+!s100 6z>cAT4LDJ46OTBCM8Ql13
+R7
+32
+R24
+!i10b 1
+R25
+R26
+R27
+!i113 0
+R12
+R13
