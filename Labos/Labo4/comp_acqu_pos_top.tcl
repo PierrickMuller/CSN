@@ -4,7 +4,7 @@
 #
 # Fichier      : comp_acqu_pos_top.tcl
 # Description  : Script de compilation des fichiers
-# 
+#
 # Auteur       : Etienne Messerli
 # Date         : 07.12.2015
 # Version      : 0.0
@@ -14,19 +14,20 @@
 #
 #--| Modifications |--------------------------------------------------------
 # Ver  Aut.  Date   Description
-#                         
+#
 ############################################################################
 
 
-#create library work        
+#create library work
 vlib work
 #map library work to work
 vmap work work
 
 #compile files
-  
-  a complete avec vos fichiers ....
-  
+
+vcom -reportprogress 300 -work work   ../src/det_err.vhd
+vcom -reportprogress 300 -work work   ../src/mss.vhd
+vcom -reportprogress 300 -work work   ../src/bloc_comptage_n.vhd
 vcom -reportprogress 300 -work work   ../src/acqu_pos_top.vhd
 
 #compile files for simulation

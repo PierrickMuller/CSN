@@ -53,6 +53,7 @@ constant Etat_A_3     : std_logic_vector(4 downto 0) := "01101";
 constant Etat_A_3_W   : std_logic_vector(4 downto 0) := "01110";
 constant Etat_A_4     : std_logic_vector(4 downto 0) := "01111";
 constant Etat_W_4     : std_logic_vector(4 downto 0) := "10000";
+constant Etat_A_4_W   : std_logic_vector(4 downto 0) := "10001";
 
 -- Constantes pour les capteurs (n -> not)
 constant nAnB         : std_logic_vector(1 downto 0) := "00";
@@ -248,7 +249,18 @@ begin
       when Etat_A_4 =>
         compt_en_o <= '1'; sens_o <= '0'; err_o <= '0';
         if (captors_s = nAnB) then
-          Etat_Futur_s <= Etat_W_4;
+          Etat_Futur_s <= Etat_A_4_W;
+        elsif (captors_s = nAB) then
+          Etat_Futur_s <= Etat_A_1;
+        elsif (captors_s = AnB) then
+          Etat_Futur_s <= Etat_H_1;
+        else
+          Etat_Futur_s <= Etat_Erreur;
+        end if;
+      when Etat_A_4_W =>
+        compt_en_o <= '0'; sens_o <= '0'; err_o <= '0';
+        if (captors_s = nAnB) then
+          Etat_Futur_s <= Etat_A_4_W;
         elsif (captors_s = nAB) then
           Etat_Futur_s <= Etat_A_1;
         elsif (captors_s = AnB) then

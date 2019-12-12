@@ -5,16 +5,16 @@
 -- Fichier      : console_sim.vhd
 --
 -- Description  : Ce fichier permet l'utilisation de la console generique du REDS.
--- 
+--
 -- Auteur       : Gilles Habegger
 -- Date         : 20.04.2015
--- 
+--
 -- Utilise      : -
--- 
+--
 --| Modifications |------------------------------------------------------------
 -- Ver  Qui    Date        Description
 -- 1.0  EMI   22.05.2015   Intanciation du composant gen_pwm_top
---  
+--
 -------------------------------------------------------------------------------
 
 library ieee;
@@ -86,22 +86,27 @@ architecture struct of console_sim is
 
   constant PERIODE    : time := 100 ns;  --periode pour console REDS !
   signal   clock_s    : std_logic := '0';
-  
-  component le_votre port(
-      clock_i       : in  std_logic;  --Horloge du systeme
-      reset_i       : in  std_logic;  --Remise a Zero asychrone
- 
-      copier entite de votre composant ...
- 
-      );
+
+  component acqu_pos_top is
+    port (clock_i       : in  std_logic;  --Horloge du systeme
+          reset_i       : in  std_logic;  --Remise a Zero asychrone
+          init_pos_i    : in  std_logic;  --Initialisation a zero, sychrone, des compteurs (pos, err)
+          capt_a_i      : in  std_logic;  --Encodeur phase A
+          capt_b_i      : in  std_logic;  --Encodeur phase B
+          dir_cw_o      : out std_logic;  --Direction: '1' CW (horaire), '0' CCW (anti-horaire)
+          position_o    : out std_logic_vector(15 downto 0); --position de la table
+          det_err_o     : out std_logic;  --Detection d'une erreur (double changement A et B)
+          err_o         : out std_logic;  --Il y a eu une erreur de double changement A et B)
+          nbr_err_o     : out std_logic_vector(4 downto 0)  --nombre d'erreur detectees
+    );
   end component;
-  for all : le_votre use entity work.le_votre(a_modifier);
-  
+  for all : acqu_pos_top use entity work.acqu_pos_top(struct);
+
   --declaration de signaux internes
   signal position_s : std_logic_vector(15 downto 0);
+  signal nbr_err_s : std_logic_vector(4 downto 0);
 
-  
-  
+
 begin
 
 ----------------------------------------------------------------------------------
@@ -114,14 +119,20 @@ begin
 
 ----------------------------------------------------------------------------------
 -- Instanciation du composant a simuler
-   uut: le_votre port map(
+   uut: acqu_pos_top port map(
      clock_i      => clock_s,
      reset_i      => S15_sti,
+     init_pos_i   => S0_sti,
+     capt_a_i     => S1_sti,
+     capt_b_i     => S2_sti,
+     dir_cw_o     => L0_obs,
+     position_o   => position_s,
+     det_err_o    => L15_obs,
+     err_o        => L14_obs,
+     nbr_err_o    => nbr_err_s
 
-                  => position_s,
-     
      );
-   
+
   Result_A_obs <= position_s;
   Result_B_obs(15 downto 0) <= (others => '0');
   -- revol_o pas affiche
@@ -129,5 +140,5 @@ begin
   L4_obs <= nbr_err_s(1);
   L5_obs <= nbr_err_s(2);
   L6_obs <= nbr_err_s(3);
-  
+
 end struct;

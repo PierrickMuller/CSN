@@ -50,6 +50,8 @@ architecture struct of acqu_pos_top is
    signal err_s       : std_logic;
    signal sens_s      : std_logic;
    signal compt_en_s  : std_logic;
+   signal capt_a_s    : std_logic;
+   signal capt_b_s    : std_logic;
 
    --| component declaration |--------------------------------------------
    component det_err is
@@ -110,8 +112,8 @@ begin
   machine_etat : mss
   port map( reset_i => reset_i,
             clk_i => clock_i,
-            capt_a_i => capt_a_i,
-            capt_b_i => capt_b_i,
+            capt_a_i => capt_a_s,
+            capt_b_i => capt_b_s,
             sens_o => sens_s,
             compt_en_o => compt_en_s,
             err_o => err_s
@@ -122,5 +124,16 @@ begin
   nbr_err_o <= "00000";
   dir_cw_o <= sens_s;
   err_o <= err_s;
+
+  sync_capt : process (clock_i)
+  begin
+    if(reset_i = '1') then
+      capt_a_s <= '0';
+      capt_b_s <= '0';
+    elsif rising_Edge(clock_i) then
+      capt_a_s <= capt_a_i;
+      capt_b_s <= capt_b_i;
+    end if;
+  end process;
 
 end struct;
