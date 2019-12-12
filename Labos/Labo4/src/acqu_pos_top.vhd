@@ -2,14 +2,14 @@
 -- HEIG-VD, Haute Ecole d'Ingenierie et de Gestion du canton de Vaud
 -- Institut REDS, Reconfigurable & Embedded Digital Systems
 --
--- Fichier      : acqu_pos_top.vhd 
+-- Fichier      : acqu_pos_top.vhd
 -- Description  : Acquisition de la position de la table tournante
--- 
--- Auteur       : Etienne Messerli
--- Date         : 07.12.2015 
 --
--- Utilise      : Labo csn, décembre 2015 
---  
+-- Auteur       : Etienne Messerli
+-- Date         : 07.12.2015
+--
+-- Utilise      : Labo csn, décembre 2015
+--
 --------------------------------------------------------------------------
 -- Description : Acquisition de la position de la table tournante
 --   -mesure de la position de la table, comptage incréments capteurs
@@ -19,7 +19,7 @@
 --      sens_hr : actif si sens horaire
 --      Inc_up, Inc_dn: impulsion pour comptage position
 --      det_err: indique double changement simultane de A et B
---        
+--
 --| Modifications |-----------------------------------------------------------
 -- Ver  Date        Qui   Description
 -- 0.1  14.01.2015  EMI   version initiale "mgn_position.vhd"
@@ -45,28 +45,82 @@ entity acqu_pos_top is
   );
 end acqu_pos_top;
 
-architecture struct of acqu_pos_top is 
+architecture struct of acqu_pos_top is
    --| internal signal declarations |-------------------------------------
-
-   
-   
+   signal err_s       : std_logic;
+   signal sens_s      : std_logic;
+   signal compt_en_s  : std_logic;
 
    --| component declaration |--------------------------------------------
+   component det_err is
+      port(reset_i     : in  std_logic; -- entrée reset asynchrone
+           clk_i       : in  std_logic; -- entrée clock
+           err_i       : in  std_logic; -- entree determinant s'il y a eu une erreur
+           init_pos_i  : in  std_logic; -- entree qui dicte si on doit enlever l'erreur ou non
+           det_err_o   : out std_logic -- sortie suivant s'il y a eu erreur ou non
+          );
+   end component;
+   for all: det_err use entity work.det_err(comport);
 
-   
+   component bloc_comptage_n is
+      generic(N_BITS : positive range 1 to 32 := 16);
+      port(reset_i     : in  std_logic; -- entrée reset asynchrone
+           clk_i       : in  std_logic; -- entrée clock
+           sens_i      : in  std_logic; -- entree determinant le sens de rotation (operation +/-)
+           compt_en_i  : in  std_logic; -- entree qui enable ou non le comptage (+/- 1/0)
+           init_pos_i  : in  std_logic; -- entree qui dicte si on doit reinitialiser pos ou non
+           pos_o       : out  std_logic_vector(N_BITS-1 downto 0) -- sortie valeur du compteur
+          );
+   end component;
+   for all: bloc_comptage_n use entity work.bloc_comptage_n(comport);
+
+   component mss is
+      port(reset_i     : in  std_logic; -- entrée reset asynchrone
+           clk_i       : in  std_logic; -- entrée clock
+           capt_a_i    : in  std_logic; -- entree capteur a
+           capt_b_i    : in  std_logic; -- entree capteur b
+           sens_o      : out std_logic; -- sortie qui donne le sens de rotation
+           compt_en_o  : out std_logic; -- sortie qui determine s'il faut compter ou non
+           err_o       : out std_logic  -- sortie qui donne s'il y a eu une erreur ou non
+          );
+   end component;
+   for all: mss use entity work.mss(M_Etat);
 
 begin
-  --polarity adaptation
-  
- 
+  --polarity adaptation (none needed here)
 
   -- Instance port mappings.
+  ff_erreur  : det_err
+  port map( reset_i => reset_i,
+            clk_i => clock_i,
+            err_i => err_s,
+            init_pos_i => init_pos_i,
+            det_err_o => det_err_o
+            );
 
-  
-  
-  
+  compteur : bloc_comptage_n
+  port map( reset_i => reset_i,
+            clk_i => clock_i,
+            sens_i => sens_s,
+            compt_en_i => compt_en_s,
+            init_pos_i => init_pos_i,
+            pos_o => position_o
+            );
+
+  machine_etat : mss
+  port map( reset_i => reset_i,
+            clk_i => clock_i,
+            capt_a_i => capt_a_i,
+            capt_b_i => capt_b_i,
+            sens_o => sens_s,
+            compt_en_o => compt_en_s,
+            err_o => err_s
+            );
+
+
   --| output assignment |-------------------------------------------------
+  nbr_err_o <= "00000";
+  dir_cw_o <= sens_s;
+  err_o <= err_s;
 
-  
-  
 end struct;

@@ -22,7 +22,7 @@ entity bloc_comptage_n is
         sens_i      : in  std_logic; -- entree determinant le sens de rotation (operation +/-)
         compt_en_i  : in  std_logic; -- entree qui enable ou non le comptage (+/- 1/0)
         init_pos_i  : in  std_logic; -- entree qui dicte si on doit reinitialiser pos ou non
-        pos_o       : out  std_logic_vector(N_BITS-1 downto 0) -- sortie valeur du compteur
+        pos_o       : out std_logic_vector(N_BITS-1 downto 0) -- sortie valeur du compteur
        );
 end bloc_comptage_n;
 
@@ -31,13 +31,13 @@ architecture comport of bloc_comptage_n is
 -- Pas de composants externes
 
 -- Signaux internes
-signal pos_fut_s  : signed(N_BITS-1 downto 0);
-signal pos_pres_s : signed(N_BITS-1 downto 0);
+signal pos_fut_s  : unsigned(N_BITS-1 downto 0);
+signal pos_pres_s : unsigned(N_BITS-1 downto 0);
 
 begin
   pos_fut_s <=  (others => '0') when init_pos_i = '1' else
                 pos_pres_s when compt_en_i = '0' else
-                pos_pres_s + 1 when sens_i = '0' else
+                pos_pres_s + 1 when sens_i = '1' else
                 pos_pres_s - 1;
 
   process(reset_i, clk_i)
@@ -45,7 +45,7 @@ begin
     if(reset_i = '1') then
       pos_pres_s <= (others => '0');
     elsif rising_Edge(clk_i) then
-      pos_pres_s <= pos_fut_s;
+        pos_pres_s <= pos_fut_s;
     end if;
   end process;
 

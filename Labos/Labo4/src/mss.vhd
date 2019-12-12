@@ -33,7 +33,7 @@ architecture M_Etat of mss is
 -- Nous avons 17 etats, il faut donc 5 bits -> 32 etats max
 signal Etat_Present_s, Etat_Futur_s : std_logic_vector(4 downto 0);
 -- Signal qui contiendra l'etat des capteurs dans le process
-signal captors : std_logic_vector(1 downto 0);
+signal captors_s : std_logic_vector(1 downto 0);
 
 -- Constantes pour fixer le codage
 constant Etat_Initial : std_logic_vector(4 downto 0) := "00000";
@@ -61,195 +61,197 @@ constant AnB          : std_logic_vector(1 downto 0) := "10";
 constant AB           : std_logic_vector(1 downto 0) := "11";
 
 begin
-  Fut : process(capt_a_i, capt_b_i, Etat_Present_s)
+
+  captors_s <= capt_a_i & capt_b_i;
+
+  Fut : process(Etat_Present_s, captors_s)
   begin
     Etat_Futur_s <= Etat_Initial; -- valeur pas defaut
     compt_en_o <= '0'; sens_o <= '0'; err_o <= '0'; -- valeurs par defaut
-    captors <= capt_a_i & capt_b_i;
     case Etat_Present_s is
       when Etat_Initial =>
         compt_en_o <= '0'; sens_o <= '0'; err_o <= '0';
-        if (captors = nAnB) then
+        if (captors_s = nAnB) then
           Etat_Futur_s <= Etat_W_4;
-        elsif (captors = nAB) then
+        elsif (captors_s = nAB) then
           Etat_Futur_s <= Etat_A_1_W;
-        elsif (captors = AnB) then
+        elsif (captors_s = AnB) then
           Etat_Futur_s <= Etat_H_1_W;
         else
           Etat_Futur_s <= Etat_H_2_W;
         end if;
       when Etat_Erreur =>
         compt_en_o <= '0'; sens_o <= '0'; err_o <= '1';
-        if (captors = nAnB) then
+        if (captors_s = nAnB) then
           Etat_Futur_s <= Etat_W_4;
-        elsif (captors = nAB) then
+        elsif (captors_s = nAB) then
           Etat_Futur_s <= Etat_A_1_W;
-        elsif (captors = AnB) then
+        elsif (captors_s = AnB) then
           Etat_Futur_s <= Etat_H_1_W;
         else
           Etat_Futur_s <= Etat_H_2_W;
         end if;
       when Etat_H_1 =>
-        compt_en_o <= '1'; sens_o <= '0'; err_o <= '0';
-        if (captors = nAnB) then
+        compt_en_o <= '1'; sens_o <= '1'; err_o <= '0';
+        if (captors_s = nAnB) then
           Etat_Futur_s <= Etat_A_4;
-        elsif (captors = nAB) then
+        elsif (captors_s = nAB) then
           Etat_Futur_s <= Etat_Erreur;
-        elsif (captors = AnB) then
+        elsif (captors_s = AnB) then
           Etat_Futur_s <= Etat_H_1_W;
         else
           Etat_Futur_s <= Etat_H_2;
         end if;
       when Etat_H_1_W =>
-        compt_en_o <= '0'; sens_o <= '0'; err_o <= '0';
-        if (captors = nAnB) then
+        compt_en_o <= '0'; sens_o <= '1'; err_o <= '0';
+        if (captors_s = nAnB) then
           Etat_Futur_s <= Etat_A_4;
-        elsif (captors = nAB) then
+        elsif (captors_s = nAB) then
           Etat_Futur_s <= Etat_Erreur;
-        elsif (captors = AnB) then
+        elsif (captors_s = AnB) then
           Etat_Futur_s <= Etat_H_1_W;
         else
           Etat_Futur_s <= Etat_H_2;
         end if;
       when Etat_H_2 =>
-        compt_en_o <= '1'; sens_o <= '0'; err_o <= '0';
-        if (captors = nAnB) then
+        compt_en_o <= '1'; sens_o <= '1'; err_o <= '0';
+        if (captors_s = nAnB) then
           Etat_Futur_s <= Etat_Erreur;
-        elsif (captors = nAB) then
+        elsif (captors_s = nAB) then
           Etat_Futur_s <= Etat_H_3;
-        elsif (captors = AnB) then
+        elsif (captors_s = AnB) then
           Etat_Futur_s <= Etat_A_3;
         else
           Etat_Futur_s <= Etat_H_2_W;
         end if;
       when Etat_H_2_W =>
-        compt_en_o <= '0'; sens_o <= '0'; err_o <= '0';
-        if (captors = nAnB) then
+        compt_en_o <= '0'; sens_o <= '1'; err_o <= '0';
+        if (captors_s = nAnB) then
           Etat_Futur_s <= Etat_Erreur;
-        elsif (captors = nAB) then
+        elsif (captors_s = nAB) then
           Etat_Futur_s <= Etat_H_3;
-        elsif (captors = AnB) then
+        elsif (captors_s = AnB) then
           Etat_Futur_s <= Etat_A_3;
         else
           Etat_Futur_s <= Etat_H_2_W;
         end if;
       when Etat_H_3 =>
-        compt_en_o <= '1'; sens_o <= '0'; err_o <= '0';
-        if (captors = nAnB) then
+        compt_en_o <= '1'; sens_o <= '1'; err_o <= '0';
+        if (captors_s = nAnB) then
           Etat_Futur_s <= Etat_H_4;
-        elsif (captors = nAB) then
+        elsif (captors_s = nAB) then
           Etat_Futur_s <= Etat_H_3_W;
-        elsif (captors = AnB) then
+        elsif (captors_s = AnB) then
           Etat_Futur_s <= Etat_Erreur;
         else
           Etat_Futur_s <= Etat_A_2;
         end if;
       when Etat_H_3_W =>
-        compt_en_o <= '0'; sens_o <= '0'; err_o <= '0';
-        if (captors = nAnB) then
+        compt_en_o <= '0'; sens_o <= '1'; err_o <= '0';
+        if (captors_s = nAnB) then
           Etat_Futur_s <= Etat_H_4;
-        elsif (captors = nAB) then
+        elsif (captors_s = nAB) then
           Etat_Futur_s <= Etat_H_3_W;
-        elsif (captors = AnB) then
+        elsif (captors_s = AnB) then
           Etat_Futur_s <= Etat_Erreur;
         else
           Etat_Futur_s <= Etat_A_2;
         end if;
       when Etat_H_4 =>
-        compt_en_o <= '1'; sens_o <= '0'; err_o <= '0';
-        if (captors = nAnB) then
+        compt_en_o <= '1'; sens_o <= '1'; err_o <= '0';
+        if (captors_s = nAnB) then
           Etat_Futur_s <= Etat_W_4;
-        elsif (captors = nAB) then
+        elsif (captors_s = nAB) then
           Etat_Futur_s <= Etat_A_1;
-        elsif (captors = AnB) then
+        elsif (captors_s = AnB) then
           Etat_Futur_s <= Etat_H_1;
         else
           Etat_Futur_s <= Etat_Erreur;
         end if;
       when Etat_W_4 =>
-        compt_en_o <= '0'; sens_o <= '0'; err_o <= '0';
-        if (captors = nAnB) then
+        compt_en_o <= '0'; sens_o <= '1'; err_o <= '0';
+        if (captors_s = nAnB) then
           Etat_Futur_s <= Etat_W_4;
-        elsif (captors = nAB) then
+        elsif (captors_s = nAB) then
           Etat_Futur_s <= Etat_A_1;
-        elsif (captors = AnB) then
+        elsif (captors_s = AnB) then
           Etat_Futur_s <= Etat_H_1;
         else
           Etat_Futur_s <= Etat_Erreur;
         end if;
       when Etat_A_1 =>
-        compt_en_o <= '1'; sens_o <= '1'; err_o <= '0';
-        if (captors = nAnB) then
+        compt_en_o <= '1'; sens_o <= '0'; err_o <= '0';
+        if (captors_s = nAnB) then
           Etat_Futur_s <= Etat_H_4;
-        elsif (captors = nAB) then
+        elsif (captors_s = nAB) then
           Etat_Futur_s <= Etat_A_1_W;
-        elsif (captors = AnB) then
+        elsif (captors_s = AnB) then
           Etat_Futur_s <= Etat_Erreur;
         else
           Etat_Futur_s <= Etat_A_2;
         end if;
       when Etat_A_1_W =>
-        compt_en_o <= '0'; sens_o <= '1'; err_o <= '0';
-        if (captors = nAnB) then
+        compt_en_o <= '0'; sens_o <= '0'; err_o <= '0';
+        if (captors_s = nAnB) then
           Etat_Futur_s <= Etat_H_4;
-        elsif (captors = nAB) then
+        elsif (captors_s = nAB) then
           Etat_Futur_s <= Etat_A_1_W;
-        elsif (captors = AnB) then
+        elsif (captors_s = AnB) then
           Etat_Futur_s <= Etat_Erreur;
         else
           Etat_Futur_s <= Etat_A_2;
         end if;
       when Etat_A_2 =>
-        compt_en_o <= '1'; sens_o <= '1'; err_o <= '0';
-        if (captors = nAnB) then
+        compt_en_o <= '1'; sens_o <= '0'; err_o <= '0';
+        if (captors_s = nAnB) then
           Etat_Futur_s <= Etat_Erreur;
-        elsif (captors = nAB) then
+        elsif (captors_s = nAB) then
           Etat_Futur_s <= Etat_H_3;
-        elsif (captors = AnB) then
+        elsif (captors_s = AnB) then
           Etat_Futur_s <= Etat_A_3;
         else
           Etat_Futur_s <= Etat_A_2_W;
         end if;
       when Etat_A_2_W =>
-        compt_en_o <= '0'; sens_o <= '1'; err_o <= '0';
-        if (captors = nAnB) then
+        compt_en_o <= '0'; sens_o <= '0'; err_o <= '0';
+        if (captors_s = nAnB) then
           Etat_Futur_s <= Etat_Erreur;
-        elsif (captors = nAB) then
+        elsif (captors_s = nAB) then
           Etat_Futur_s <= Etat_H_3;
-        elsif (captors = AnB) then
+        elsif (captors_s = AnB) then
           Etat_Futur_s <= Etat_A_3;
         else
           Etat_Futur_s <= Etat_A_2_W;
         end if;
       when Etat_A_3 =>
-        compt_en_o <= '1'; sens_o <= '1'; err_o <= '0';
-        if (captors = nAnB) then
+        compt_en_o <= '1'; sens_o <= '0'; err_o <= '0';
+        if (captors_s = nAnB) then
           Etat_Futur_s <= Etat_A_4;
-        elsif (captors = nAB) then
+        elsif (captors_s = nAB) then
           Etat_Futur_s <= Etat_Erreur;
-        elsif (captors = AnB) then
+        elsif (captors_s = AnB) then
           Etat_Futur_s <= Etat_A_3_W;
         else
           Etat_Futur_s <= Etat_H_2;
         end if;
       when Etat_A_3_W =>
-        compt_en_o <= '0'; sens_o <= '1'; err_o <= '0';
-        if (captors = nAnB) then
+        compt_en_o <= '0'; sens_o <= '0'; err_o <= '0';
+        if (captors_s = nAnB) then
           Etat_Futur_s <= Etat_A_4;
-        elsif (captors = nAB) then
+        elsif (captors_s = nAB) then
           Etat_Futur_s <= Etat_Erreur;
-        elsif (captors = AnB) then
+        elsif (captors_s = AnB) then
           Etat_Futur_s <= Etat_A_3_W;
         else
           Etat_Futur_s <= Etat_H_2;
         end if;
       when Etat_A_4 =>
-        compt_en_o <= '1'; sens_o <= '1'; err_o <= '0';
-        if (captors = nAnB) then
+        compt_en_o <= '1'; sens_o <= '0'; err_o <= '0';
+        if (captors_s = nAnB) then
           Etat_Futur_s <= Etat_W_4;
-        elsif (captors = nAB) then
+        elsif (captors_s = nAB) then
           Etat_Futur_s <= Etat_A_1;
-        elsif (captors = AnB) then
+        elsif (captors_s = AnB) then
           Etat_Futur_s <= Etat_H_1;
         else
           Etat_Futur_s <= Etat_Erreur;
