@@ -52,6 +52,7 @@ architecture struct of acqu_pos_top is
    signal compt_en_s  : std_logic;  -- signal pour enable le comptage
    signal capt_a_s    : std_logic;  -- signal du capteur a
    signal capt_b_s    : std_logic;  -- signal du capteur b
+   signal init_pos_s  : std_logic;  -- signal de l'initialisation de la position
 
    --| component declaration |--------------------------------------------
    component det_err is
@@ -96,7 +97,7 @@ begin
   port map( reset_i => reset_i,
             clk_i => clock_i,
             err_i => err_s,
-            init_pos_i => init_pos_i,
+            init_pos_i => init_pos_s,
             det_err_o => det_err_o
             );
 
@@ -105,7 +106,7 @@ begin
             clk_i => clock_i,
             sens_i => sens_s,
             compt_en_i => compt_en_s,
-            init_pos_i => init_pos_i,
+            init_pos_i => init_pos_s,
             pos_o => position_o
             );
 
@@ -130,9 +131,11 @@ begin
     if(reset_i = '1') then
       capt_a_s <= '0';
       capt_b_s <= '0';
+      init_pos_s <= '0';
     elsif rising_Edge(clock_i) then
       capt_a_s <= capt_a_i;
       capt_b_s <= capt_b_i;
+      init_pos_s <= init_pos_i;
     end if;
   end process;
 
