@@ -31,16 +31,17 @@ architecture comport of bloc_comptage_n is
 -- Pas de composants externes
 
 -- Signaux internes
-signal pos_fut_s  : unsigned(N_BITS-1 downto 0);
-signal pos_pres_s : unsigned(N_BITS-1 downto 0);
+signal pos_fut_s  : unsigned(N_BITS-1 downto 0);  -- signal representant la prochaine position
+signal pos_pres_s : unsigned(N_BITS-1 downto 0);  -- signal representant la position actuelle du systeme
 
 begin
-  pos_fut_s <=  (others => '0') when init_pos_i = '1' else
-                pos_pres_s when compt_en_i = '0' else
-                pos_pres_s + 1 when sens_i = '1' else
+  -- Calcul de la position future par ordre de priorite
+  pos_fut_s <=  (others => '0') when init_pos_i = '1' else  -- mise a 0 si init
+                pos_pres_s when compt_en_i = '0' else       -- rien si on ne bouge pas
+                pos_pres_s + 1 when sens_i = '1' else       -- autrement on incremente / decremente suivant le sens
                 pos_pres_s - 1;
 
-  process(reset_i, clk_i)
+  process(reset_i, clk_i) -- Process pour reset / mettre la valeur de la position a jour a chaque coup de clock
   begin
     if(reset_i = '1') then
       pos_pres_s <= (others => '0');
@@ -49,5 +50,5 @@ begin
     end if;
   end process;
 
-  pos_o <= std_logic_vector(pos_pres_s);
+  pos_o <= std_logic_vector(pos_pres_s);  -- Affectatin de la sortie position
 end comport;

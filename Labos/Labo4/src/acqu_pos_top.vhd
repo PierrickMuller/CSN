@@ -24,7 +24,7 @@
 -- Ver  Date        Qui   Description
 -- 0.1  14.01.2015  EMI   version initiale "mgn_position.vhd"
 -- 1.0  07.12.2015  EMI   Adaptation pour le labo de décembre 2015
---
+-- 1.1  17.12.2019  TG PM Remplissage du laboratoire
 -----------------------------------------------------------------------
 
 library IEEE;
@@ -47,11 +47,11 @@ end acqu_pos_top;
 
 architecture struct of acqu_pos_top is
    --| internal signal declarations |-------------------------------------
-   signal err_s       : std_logic;
-   signal sens_s      : std_logic;
-   signal compt_en_s  : std_logic;
-   signal capt_a_s    : std_logic;
-   signal capt_b_s    : std_logic;
+   signal err_s       : std_logic;  -- signal pour faire passer l'erreur
+   signal sens_s      : std_logic;  -- signal pour faire passer le sens
+   signal compt_en_s  : std_logic;  -- signal pour enable le comptage
+   signal capt_a_s    : std_logic;  -- signal du capteur a
+   signal capt_b_s    : std_logic;  -- signal du capteur b
 
    --| component declaration |--------------------------------------------
    component det_err is
@@ -59,7 +59,7 @@ architecture struct of acqu_pos_top is
            clk_i       : in  std_logic; -- entrée clock
            err_i       : in  std_logic; -- entree determinant s'il y a eu une erreur
            init_pos_i  : in  std_logic; -- entree qui dicte si on doit enlever l'erreur ou non
-           det_err_o   : out std_logic -- sortie suivant s'il y a eu erreur ou non
+           det_err_o   : out std_logic  -- sortie suivant s'il y a eu erreur ou non
           );
    end component;
    for all: det_err use entity work.det_err(comport);
@@ -121,11 +121,11 @@ begin
 
 
   --| output assignment |-------------------------------------------------
-  nbr_err_o <= "00000";
-  dir_cw_o <= sens_s;
-  err_o <= err_s;
+  nbr_err_o <= "00000"; -- On assigne 0 au nbr d'erreurs, pas demande dans la laboratoire
+  dir_cw_o <= sens_s;   -- Assignation de la direction a la sortie
+  err_o <= err_s;       -- Assignation de l'erreur a la sortie
 
-  sync_capt : process (clock_i)
+  sync_capt : process (clock_i) -- Process pour synchroniser les capteurs, le systeme ne fonctionne autrement pas
   begin
     if(reset_i = '1') then
       capt_a_s <= '0';

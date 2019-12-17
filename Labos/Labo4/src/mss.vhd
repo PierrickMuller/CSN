@@ -65,7 +65,7 @@ begin
 
   captors_s <= capt_a_i & capt_b_i;
 
-  Fut : process(Etat_Present_s, captors_s)
+  Fut : process(Etat_Present_s, captors_s)  -- Process pour mise a jour de l'etat lors d'un changement des entrees ou de l'etat 
   begin
     Etat_Futur_s <= Etat_Initial; -- valeur pas defaut
     compt_en_o <= '0'; sens_o <= '0'; err_o <= '0'; -- valeurs par defaut
@@ -273,7 +273,7 @@ begin
     end case;
   end process;
 
-  Mem : process (clk_i, reset_i)
+  Mem : process (clk_i, reset_i) -- Process pour reset / mise a jour de l'etat
   begin
     if(reset_i = '1') then
       Etat_Present_s <= Etat_Initial;
